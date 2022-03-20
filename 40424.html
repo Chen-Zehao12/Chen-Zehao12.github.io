@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Matplotlib | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. Matplotlib介绍 ​		Matplotlib是一个Python的2D绘图库，它以各种硬拷贝格式和跨平台的交互式环境生成出版质量级别的图形。通过Matplotlib，开发者可以仅需要几行代码，便可以生成绘图。一般可绘制折线图、散点图、柱状图、饼图、直方图、子图等等。Matplot使用Numpy进行数组运算，并调用一系列其他的Python库来实现硬件交互。 ​		matplotlib.p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matplotlib">
+<meta property="og:url" content="https://chenzehao.com/40424.html">
+<meta property="og:site_name" content="陈泽豪">
+<meta property="og:description" content="1. Matplotlib介绍 ​		Matplotlib是一个Python的2D绘图库，它以各种硬拷贝格式和跨平台的交互式环境生成出版质量级别的图形。通过Matplotlib，开发者可以仅需要几行代码，便可以生成绘图。一般可绘制折线图、散点图、柱状图、饼图、直方图、子图等等。Matplot使用Numpy进行数组运算，并调用一系列其他的Python库来实现硬件交互。 ​		matplotlib.p">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2021-08-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-21T05:52:58.950Z">
+<meta property="article:author" content="陈泽豪">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg"><link rel="canonical" href="https://chenzehao.com/40424"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><meta name="baidu-site-verification" content="code-GhGfwpqKHn"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9191e58322566f7fdcbb360b8eeb1686";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Matplotlib',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-21 13:52:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Matplotlib</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-03T16:00:00.000Z" title="发表于 2021-08-04 00:00:00">2021-08-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:52:58.950Z" title="更新于 2022-01-21 13:52:58">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">866</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-Matplotlib介绍">1. Matplotlib介绍</h2>
+<p>​		Matplotlib是一个Python的2D绘图库，它以各种硬拷贝格式和跨平台的交互式环境生成出版质量级别的图形。通过Matplotlib，开发者可以仅需要几行代码，便可以生成绘图。一般可绘制折线图、散点图、柱状图、饼图、直方图、子图等等。Matplot使用Numpy进行数组运算，并调用一系列其他的Python库来实现硬件交互。</p>
+<p>​		matplotlib.pyplot是一个有命令风格的函数集合，它看起来和MATLAB很相似。每一个pyplot函数都使一副图像做出些许改变，例如创建一幅图，在图中创建一个绘图区域，在绘图区域中添加一条线等等。在matplotlib.pyplot中，各种状态通过函数调用保存起来，以便于可以随时跟踪像当前图像和绘图区域这样的东西。</p>
+<h2 id="2-基本绘图流程">2. 基本绘图流程</h2>
+<img src="https://www.hualigs.cn/image/610a064c116d6.jpg"/>
+<h2 id="3-准备工作">3. 准备工作</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+<h2 id="4-常用函数">4. 常用函数</h2>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>plt.figure()</td>
+<td>创建一个新的画布，或激活一个现有的画布</td>
+</tr>
+<tr>
+<td>plt.plot()</td>
+<td>可以绘制点和线、折线图、曲线图</td>
+</tr>
+<tr>
+<td>plt.show()</td>
+<td>显示所有已打开的画布</td>
+</tr>
+<tr>
+<td>plt.subplot()</td>
+<td>添加子图</td>
+</tr>
+<tr>
+<td>plt.savefig()</td>
+<td>保存当前图形，注意：该函数一定要放在plt.show()之前</td>
+</tr>
+<tr>
+<td>fig.add_subplot()</td>
+<td>使用ax的方式添加子图，操作比plt.subplot()更加灵活</td>
+</tr>
+<tr>
+<td>plt.rcParams[“font.family”]=“SimHei”</td>
+<td>解决中文显示问题，SimHei为中文简体黑体</td>
+</tr>
+<tr>
+<td>ax.set_xlim()</td>
+<td>设置x轴的刻度范围</td>
+</tr>
+<tr>
+<td>ax.set_ylim()</td>
+<td>设置y轴的刻度范围</td>
+</tr>
+<tr>
+<td>ax.set_xticks()</td>
+<td>设置x轴的刻度</td>
+</tr>
+<tr>
+<td>ax.set_yticks()</td>
+<td>设置y轴的刻度</td>
+</tr>
+<tr>
+<td>ax.set_xticklabels()</td>
+<td>设置x轴的刻度标签</td>
+</tr>
+<tr>
+<td>ax.set_yticklabels()</td>
+<td>设置y轴的刻度标签</td>
+</tr>
+<tr>
+<td>ax.tick_params()</td>
+<td>装饰轴上的刻度线和轴标签</td>
+</tr>
+<tr>
+<td>ax.set_xlabel()</td>
+<td>设置x轴坐标标签</td>
+</tr>
+<tr>
+<td>ax.set_ylabel()</td>
+<td>设置y轴坐标标签</td>
+</tr>
+<tr>
+<td>ax.set_title()</td>
+<td>设置图的标题</td>
+</tr>
+<tr>
+<td>ax.legend()</td>
+<td>添加图例</td>
+</tr>
+<tr>
+<td>ax.text()</td>
+<td>在图中指定位置添加文本</td>
+</tr>
+<tr>
+<td>ax.annotate()</td>
+<td>在图文指定位置添加箭头和文本</td>
+</tr>
+<tr>
+<td>ax.spines()</td>
+<td>装饰坐标轴</td>
+</tr>
+<tr>
+<td>ax.bar()</td>
+<td>绘制垂直条形图</td>
+</tr>
+<tr>
+<td>ax.barh()</td>
+<td>绘制水平条形图</td>
+</tr>
+<tr>
+<td>ax.scatter()</td>
+<td>绘制散点图</td>
+</tr>
+<tr>
+<td>ax.boxplot()</td>
+<td>绘制箱线图</td>
+</tr>
+<tr>
+<td>ax.pie()</td>
+<td>绘制饼图</td>
+</tr>
+<tr>
+<td>plt.grid()</td>
+<td>添加网格</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-plt-plot">5. plt.plot()</h2>
+<p>常用style参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>color</td>
+<td>颜色</td>
+</tr>
+<tr>
+<td>marker</td>
+<td>点的形状</td>
+</tr>
+<tr>
+<td>linestyle</td>
+<td>线的形状</td>
+</tr>
+<tr>
+<td>linewidth</td>
+<td>线的宽度</td>
+</tr>
+<tr>
+<td>markersize</td>
+<td>点的形状的大小</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">**Markers**</span><br><span class="line"></span><br><span class="line">=============    ===============================</span><br><span class="line">character        description</span><br><span class="line">=============    ===============================</span><br><span class="line">``<span class="string">&#x27;.&#x27;</span>``          point marker</span><br><span class="line">``<span class="string">&#x27;,&#x27;</span>``          pixel marker</span><br><span class="line">``<span class="string">&#x27;o&#x27;</span>``          circle marker</span><br><span class="line">``<span class="string">&#x27;v&#x27;</span>``          triangle_down marker</span><br><span class="line">``<span class="string">&#x27;^&#x27;</span>``          triangle_up marker</span><br><span class="line">``<span class="string">&#x27;&lt;&#x27;</span>``          triangle_left marker</span><br><span class="line">``<span class="string">&#x27;&gt;&#x27;</span>``          triangle_right marker</span><br><span class="line">``<span class="string">&#x27;1&#x27;</span>``          tri_down marker</span><br><span class="line">``<span class="string">&#x27;2&#x27;</span>``          tri_up marker</span><br><span class="line">``<span class="string">&#x27;3&#x27;</span>``          tri_left marker</span><br><span class="line">``<span class="string">&#x27;4&#x27;</span>``          tri_right marker</span><br><span class="line">``<span class="string">&#x27;s&#x27;</span>``          square marker</span><br><span class="line">``<span class="string">&#x27;p&#x27;</span>``          pentagon marker</span><br><span class="line">``<span class="string">&#x27;*&#x27;</span>``          star marker</span><br><span class="line">``<span class="string">&#x27;h&#x27;</span>``          hexagon1 marker</span><br><span class="line">``<span class="string">&#x27;H&#x27;</span>``          hexagon2 marker</span><br><span class="line">``<span class="string">&#x27;+&#x27;</span>``          plus marker</span><br><span class="line">``<span class="string">&#x27;x&#x27;</span>``          x marker</span><br><span class="line">``<span class="string">&#x27;D&#x27;</span>``          diamond marker</span><br><span class="line">``<span class="string">&#x27;d&#x27;</span>``          thin_diamond marker</span><br><span class="line">``<span class="string">&#x27;|&#x27;</span>``          vline marker</span><br><span class="line">``<span class="string">&#x27;_&#x27;</span>``          hline marker</span><br><span class="line">=============    ===============================</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">**Line Styles**</span><br><span class="line"></span><br><span class="line">=============    ===============================</span><br><span class="line">character        description</span><br><span class="line">=============    ===============================</span><br><span class="line">``<span class="string">&#x27;-&#x27;</span>``          solid line style</span><br><span class="line">``<span class="string">&#x27;--&#x27;</span>``         dashed line style</span><br><span class="line">``<span class="string">&#x27;-.&#x27;</span>``         dash-dot line style</span><br><span class="line">``<span class="string">&#x27;:&#x27;</span>``          dotted line style</span><br><span class="line">=============    ===============================</span><br><span class="line"></span><br><span class="line">Example <span class="built_in">format</span> strings::</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;b&#x27;</span>    <span class="comment"># blue markers with default shape</span></span><br><span class="line">    <span class="string">&#x27;or&#x27;</span>   <span class="comment"># red circles</span></span><br><span class="line">    <span class="string">&#x27;-g&#x27;</span>   <span class="comment"># green solid line</span></span><br><span class="line">    <span class="string">&#x27;--&#x27;</span>   <span class="comment"># dashed line with default color</span></span><br><span class="line">    <span class="string">&#x27;^k:&#x27;</span>  <span class="comment"># black triangle_up markers connected by a dotted line</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">**Colors**</span><br><span class="line"></span><br><span class="line">The supported color abbreviations are the single letter codes</span><br><span class="line"></span><br><span class="line">=============    ===============================</span><br><span class="line">character        color</span><br><span class="line">=============    ===============================</span><br><span class="line">``<span class="string">&#x27;b&#x27;</span>``          blue</span><br><span class="line">``<span class="string">&#x27;g&#x27;</span>``          green</span><br><span class="line">``<span class="string">&#x27;r&#x27;</span>``          red</span><br><span class="line">``<span class="string">&#x27;c&#x27;</span>``          cyan</span><br><span class="line">``<span class="string">&#x27;m&#x27;</span>``          magenta</span><br><span class="line">``<span class="string">&#x27;y&#x27;</span>``          yellow</span><br><span class="line">``<span class="string">&#x27;k&#x27;</span>``          black</span><br><span class="line">``<span class="string">&#x27;w&#x27;</span>``          white</span><br><span class="line">=============    ===============================</span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> the ``<span class="string">&#x27;CN&#x27;</span>`` colors that index into the default <span class="built_in">property</span> cycle.</span><br><span class="line"></span><br><span class="line">If the color <span class="keyword">is</span> the only part of the <span class="built_in">format</span> string, you can</span><br><span class="line">additionally use <span class="built_in">any</span>  `matplotlib.colors` spec, e.g. full names</span><br><span class="line">(``<span class="string">&#x27;green&#x27;</span>``) <span class="keyword">or</span> <span class="built_in">hex</span> strings (``<span class="string">&#x27;#008000&#x27;</span>``).</span><br></pre></td></tr></table></figure>
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Matplotlib%E4%BB%8B%E7%BB%8D"><span class="toc-text">1. Matplotlib介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9F%BA%E6%9C%AC%E7%BB%98%E5%9B%BE%E6%B5%81%E7%A8%8B"><span class="toc-text">2. 基本绘图流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">3. 准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">4. 常用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-plt-plot"><span class="toc-text">5. plt.plot()</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 陈泽豪</div><div class="footer_custom_text">我是豪豪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script></div></body></html>

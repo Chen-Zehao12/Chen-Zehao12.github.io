@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Tensorflow入门(五)——初识卷积神经网络（CNN） | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="原文链接：https:&#x2F;&#x2F;my.oschina.net&#x2F;u&#x2F;876354&#x2F;blog&#x2F;1620906 本文在原文基础上进行细微的修改和完善。 1. 什么是神经网络？ 这里的神经网络，也指人工神经网络（Artificial Neural Networks，简称ANNs），是一种模仿生物神经网络行为特征的算法数学模型，由神经元、节点与节点之间的连接（突触）所构成，如下图：  每个神经网络单元抽象出来的数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensorflow入门(五)——初识卷积神经网络（CNN）">
+<meta property="og:url" content="https://chenzehao.com/49759.html">
+<meta property="og:site_name" content="陈泽豪">
+<meta property="og:description" content="原文链接：https:&#x2F;&#x2F;my.oschina.net&#x2F;u&#x2F;876354&#x2F;blog&#x2F;1620906 本文在原文基础上进行细微的修改和完善。 1. 什么是神经网络？ 这里的神经网络，也指人工神经网络（Artificial Neural Networks，简称ANNs），是一种模仿生物神经网络行为特征的算法数学模型，由神经元、节点与节点之间的连接（突触）所构成，如下图：  每个神经网络单元抽象出来的数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2020-08-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-21T05:50:38.470Z">
+<meta property="article:author" content="陈泽豪">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg"><link rel="canonical" href="https://chenzehao.com/49759"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><meta name="baidu-site-verification" content="code-GhGfwpqKHn"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9191e58322566f7fdcbb360b8eeb1686";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Tensorflow入门(五)——初识卷积神经网络（CNN）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-21 13:50:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Tensorflow入门(五)——初识卷积神经网络（CNN）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-08-13T16:00:00.000Z" title="发表于 2020-08-14 00:00:00">2020-08-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:50:38.470Z" title="更新于 2022-01-21 13:50:38">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>原文链接：<a target="_blank" rel="noopener" href="https://my.oschina.net/u/876354/blog/1620906">https://my.oschina.net/u/876354/blog/1620906</a></p>
+<p>本文在原文基础上进行细微的修改和完善。</p>
+<h2 id="1-什么是神经网络？">1. 什么是神经网络？</h2>
+<p>这里的神经网络，也指人工神经网络（Artificial Neural Networks，简称ANNs），是一种模仿生物神经网络行为特征的算法数学模型，由神经元、节点与节点之间的连接（突触）所构成，如下图：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dCoEqK.png" alt="dCoEqK.png"></p>
+<p>每个神经网络单元抽象出来的数学模型如下，也叫感知器，它接收多个输入（x1，x2，x3…），产生一个输出，这就好比是神经末梢感受各种外部环境的变化（外部刺激），然后产生电信号，以便于转导到神经细胞（又叫神经元）。</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dCouPH.png" alt="dCouPH.png"></p>
+<p>单个的感知器就构成了一个简单的模型，但在现实世界中，实际的决策模型则要复杂得多，往往是由多个感知器组成的多层网络，如下图所示，这也是经典的神经网络模型，由输入层、隐含层、输出层构成。</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dCo3sP.png" alt="dCo3sP.png"></p>
+<p>人工神经网络可以映射任意复杂的非线性关系，具有很强的鲁棒性、记忆能力、自学习等能力，在分类、预测、模式识别等方面有着广泛的应用。</p>
+<h2 id="2-什么是卷积神经网络？">2. 什么是卷积神经网络？</h2>
+<p>卷积神经网络在图像识别中大放异彩，达到了前所未有的准确度，有着广泛的应用。接下来将以图像识别为例子，来介绍卷积神经网络的原理。</p>
+<p><strong>（1）案例</strong><br>
+假设给定一张图（可能是字母X或者字母O），通过CNN即可识别出是X还是O，如下图所示，那怎么做到的呢</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dCq5V0.png" alt="dCq5V0.png"></p>
+<p><strong>（2）图像输入</strong></p>
+<p>如果采用经典的神经网络模型，则需要读取整幅图像作为神经网络模型的输入（即全连接的方式），当图像的尺寸越大时，其连接的参数将变得很多，从而导致计算量非常大。</p>
+<p>而我们人类对外界的认知一般是从局部到全局，先对局部有感知的认识，再逐步对全体有认知，这是人类的认识模式。在图像中的空间联系也是类似，局部范围内的像素之间联系较为紧密，而距离较远的像素则相关性较弱。</p>
+<p>因而，每个神经元其实没有必要对全局图像进行感知，只需要对局部进行感知，然后在更高层将局部的信息综合起来就得到了全局的信息。这种模式就是卷积神经网络中降低参数数目的重要神器：<strong>局部感受野</strong>。</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dPloTA.png" alt="dPloTA.png"></p>
+<p><strong>（3）提取特征</strong></p>
+<p>如果字母X、字母O是固定不变的，那么最简单的方式就是图像之间的像素一一比对就行，但在现实生活中，字体都有着各个形态上的变化（例如手写文字识别），例如平移、缩放、旋转、微变形等等，如下图所示：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dPlLSf.png" alt="dPlLSf.png"></p>
+<p>我们的目标是对于各种形态变化的X和O，都能通过CNN准确地识别出来，这就涉及到应该如何有效地提取特征，作为识别的关键因子。</p>
+<p>回想前面讲到的“局部感受野”模式，对于CNN来说，它是一小块一小块地来进行比对，在两幅图像中大致相同的位置找到一些粗糙的特征（小块图像）进行匹配，相比起传统的整幅图逐一比对的方式，CNN的这种小块匹配方式能够更好的比较两幅图像之间的相似性。如下图：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP1klT.png" alt="dP1klT.png"></p>
+<p>以字母X为例，可以提取出三个重要特征（两个交叉线、一个对角线），如下图所示：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP1m79.png" alt="dP1m79.png"></p>
+<p>假如以像素值&quot;1&quot;代表白色，像素值&quot;-1&quot;代表黑色，则字母X的三个重要特征如下：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP1Mfx.png" alt="dP1Mfx.png"></p>
+<p>那么这些特征又是怎么进行匹配计算呢？</p>
+<p><strong>（4）卷积(Convolution)</strong></p>
+<p>这时就要请出今天的重要嘉宾：卷积。那什么是卷积呢，不急，下面慢慢道来。<br>
+当给定一张新图时，CNN并不能准确地知道这些特征到底要匹配原图的哪些部分，所以它会在原图中把每一个可能的位置都进行尝试，相当于把这个feature（特征）变成了一个过滤器。这个用来匹配的过程就被称为卷积操作，这也是卷积神经网络名字的由来。</p>
+<p>卷积的操作如下图所示：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP17B4.gif" alt="dP17B4.gif"></p>
+<p>是不是很像把毛巾沿着对角卷起来，下图形象地说明了为什么叫「卷」积</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP1j9x.png" alt="dP1j9x.png"></p>
+<p>在本案例中，要计算一个feature（特征）和其在原图上对应的某一小块的结果，只需将两个小块内对应位置的像素值进行乘法运算，然后将整个小块内乘法运算的结果累加起来，最后再除以小块内像素点总个数即可（注：也可不除以总个数的）。</p>
+<p>如果两个像素点都是白色（值均为1），那么1×1 = 1，如果均为黑色，那么(-1)×(-1) = 1，也就是说，每一对能够匹配上的像素，其相乘结果为1。类似地，任何不匹配的像素相乘结果为-1。具体过程如下（第一个、第二个……、最后一个像素的匹配结果）：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP3nKS.png" alt="dP3nKS.png"></p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP3lUs.png" alt="dP3lUs.png"></p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP3YvT.png" alt="dP3YvT.png"></p>
+<p>根据卷积的计算方式，第一块特征匹配后的卷积计算如下，结果为1</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP3B5R.png" alt="dP3B5R.png"></p>
+<p>对于其它位置的匹配，也是类似（例如中间部分的匹配）</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP3gKO.png" alt="dP3gKO.png"></p>
+<p>计算之后的卷积如下</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP32rD.png" alt="dP32rD.png"></p>
+<p>以此类推，对三个特征图像不断地重复着上述过程，通过每一个feature（特征）的卷积操作，会得到一个新的二维数组，称之为feature map。其中的值，越接近1表示对应位置和feature的匹配越完整，越是接近-1，表示对应位置和feature的反面匹配越完整，而值接近0的表示对应位置没有任何匹配或者说没有什么关联。如下图所示：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP3IPI.png" alt="dP3IPI.png"></p>
+<p>可以看出，当图像尺寸增大时，其内部的加法、乘法和除法操作的次数会增加得很快，每一个filter的大小和filter的数目呈线性增长。由于有这么多因素的影响，很容易使得计算量变得相当庞大。</p>
+<p><strong>（5）池化(Pooling)</strong></p>
+<p>为了有效地减少计算量，CNN使用的另一个有效的工具被称为“池化(Pooling)”。池化就是将输入图像进行缩小，减少像素信息，只保留重要信息。</p>
+<p>池化的操作也很简单，通常情况下，池化区域是2*2大小，然后按一定规则转换成相应的值，例如取这个池化区域内的最大值（max-pooling）、平均值（mean-pooling）等，以这个值作为结果的像素值。</p>
+<p>下图显示了左上角2*2池化区域的max-pooling结果，取该区域的最大值max(0.77,-0.11,-0.11,1.00)，作为池化后的结果，如下图：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP8SGq.png" alt="dP8SGq.png"></p>
+<p>池化区域往右，第二小块取大值max(0.11,0.33,-0.11,0.33)，作为池化后的结果，如下图：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP8FLF.png" alt="dP8FLF.png"></p>
+<p>其它区域也是类似，取区域内的最大值作为池化后的结果，最后经过池化后，结果如下：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP8Vo9.png" alt="dP8Vo9.png"></p>
+<p>对所有的feature map执行同样的操作，结果如下：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP8MQK.png" alt="dP8MQK.png"></p>
+<p>最大池化（max-pooling）保留了每一小块内的最大值，也就是相当于保留了这一块最佳的匹配结果（因为值越接近1表示匹配越好）。也就是说，它不会具体关注窗口内到底是哪一个地方匹配了，而只关注是不是有某个地方匹配上了。</p>
+<p>通过加入池化层，图像缩小了，能很大程度上减少计算量，降低机器负载。</p>
+<p><strong>（6）激活函数ReLU (Rectified Linear Units)</strong></p>
+<p>常用的激活函数有sigmoid、tanh、relu等等，前两者sigmoid/tanh比较常见于全连接层，后者ReLU常见于卷积层。</p>
+<p>回顾一下前面讲的感知机，感知机在接收到各个输入，然后进行求和，再经过激活函数后输出。激活函数的作用是用来加入非线性因素，把卷积层输出结果做非线性映射。</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP8wy8.png" alt="dP8wy8.png"></p>
+<p>在卷积神经网络中，激活函数一般使用ReLU(The Rectified Linear Unit，修正线性单元)，它的特点是收敛快，求梯度简单。计算公式也很简单，max(0,T)，即对于输入的负值，输出全为0，对于正值，则原样输出。</p>
+<p>下面看一下本案例的ReLU激活函数操作过程：</p>
+<p>第一个值，取max(0,0.77)，结果为0.77，如下图</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP8rwQ.png" alt="dP8rwQ.png"></p>
+<p>第二个值，取max(0,-0.11)，结果为0，如下图</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP8gWq.png" alt="dP8gWq.png"></p>
+<p>以此类推，经过ReLU激活函数后，结果如下：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP8hOU.png" alt="dP8hOU.png"></p>
+<p>对所有的feature map执行ReLU激活函数操作，结果如下：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP85mF.png" alt="dP85mF.png"></p>
+<p><strong>（7）深度神经网络</strong></p>
+<p>通过将上面所提到的卷积、激活函数、池化组合在一起，就变成下图：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP8HYR.png" alt="dP8HYR.png"></p>
+<p>通过加大网络的深度，增加更多的层，就得到了深度神经网络，如下图：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dP8z0e.png" alt="dP8z0e.png"></p>
+<p><strong>（8）全连接层(Fully connected layers)</strong></p>
+<p>全连接层在整个卷积神经网络中起到“分类器”的作用，即通过卷积、激活函数、池化等深度网络后，再经过全连接层对结果进行识别分类。</p>
+<p>首先将经过卷积、激活函数、池化的深度网络后的结果串起来，如下图所示：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dPG110.png" alt="dPG110.png"></p>
+<p>由于神经网络是属于监督学习，在模型训练时，根据训练样本对模型进行训练，从而得到全连接层的权重（如预测字母X的所有连接的权重）</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dPGYBF.png" alt="dPGYBF.png"></p>
+<p>在利用该模型进行结果识别时，根据刚才提到的模型训练得出来的权重，以及经过前面的卷积、激活函数、池化等深度网络计算出来的结果，进行加权求和，得到各个结果的预测值，然后取值最大的作为识别的结果（如下图，最后计算出来字母X的识别值为0.92，字母O的识别值为0.51，则结果判定为X）</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dPG6BD.png" alt="dPG6BD.png"></p>
+<p>上述这个过程定义的操作为”全连接层“(Fully connected layers)，全连接层也可以有多个，如下图：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dPGRNd.png" alt="dPGRNd.png"></p>
+<p><strong>（9）卷积神经网络（Convolutional Neural Networks）</strong></p>
+<p>将以上所有结果串起来后，就形成了一个“卷积神经网络”（CNN）结构，如下图所示：</p>
+<p><img src="https://s1.ax1x.com/2020/08/14/dPG43t.png" alt="dPG43t.png"></p>
+<p>最后，再回顾总结一下，卷积神经网络主要由两部分组成，一部分是特征提取（卷积、激活函数、池化），另一部分是分类识别（全连接层），下图便是著名的手写文字识别卷积神经网络结构图：</p>
+<p><img src="https://static.oschina.net/uploads/space/2018/0210/003512_hpv5_876354.png" alt="003512_hpv5_876354.png"></p>
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%9F"><span class="toc-text">1. 什么是神经网络？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%9F"><span class="toc-text">2. 什么是卷积神经网络？</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 陈泽豪</div><div class="footer_custom_text">我是豪豪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script></div></body></html>

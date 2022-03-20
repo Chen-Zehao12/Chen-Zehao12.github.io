@@ -1,0 +1,4 @@
+# welcome to : chenzehao.com
+User-agent: *
+Allow: /index.html
+Disallow: /

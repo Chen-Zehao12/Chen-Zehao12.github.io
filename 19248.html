@@ -1,0 +1,539 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>sklearn | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 机器学习 1.1 概念  致力于研究如何通过计算的手段，利用经验（历史数据）来改善系统自身的性能 从数据中产生模型的算法，即“学习算法”    1.2 基本术语  学习（训练）：从数据中学得模型的过程 训练集：参与模型训练的样本集合 测试：学得模型后，使用其样本进行预测的过程 测试集：被预测的样本集合 “假设”：学得模型对应的关于数据的某种潜在规律 分类：输出结果是离散值 回归：输出结果是连">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sklearn">
+<meta property="og:url" content="https://chenzehao.com/19248.html">
+<meta property="og:site_name" content="陈泽豪">
+<meta property="og:description" content="1. 机器学习 1.1 概念  致力于研究如何通过计算的手段，利用经验（历史数据）来改善系统自身的性能 从数据中产生模型的算法，即“学习算法”    1.2 基本术语  学习（训练）：从数据中学得模型的过程 训练集：参与模型训练的样本集合 测试：学得模型后，使用其样本进行预测的过程 测试集：被预测的样本集合 “假设”：学得模型对应的关于数据的某种潜在规律 分类：输出结果是离散值 回归：输出结果是连">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2020-06-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-21T05:55:20.240Z">
+<meta property="article:author" content="陈泽豪">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg"><link rel="canonical" href="https://chenzehao.com/19248"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><meta name="baidu-site-verification" content="code-GhGfwpqKHn"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9191e58322566f7fdcbb360b8eeb1686";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'sklearn',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-21 13:55:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">sklearn</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-06-15T16:00:00.000Z" title="发表于 2020-06-16 00:00:00">2020-06-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:55:20.240Z" title="更新于 2022-01-21 13:55:20">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-机器学习">1. 机器学习</h2>
+<h3 id="1-1-概念">1.1 概念</h3>
+<ul>
+<li>致力于研究如何通过计算的手段，利用经验（历史数据）来改善系统自身的性能</li>
+<li>从数据中产生模型的算法，即“学习算法”</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFuIMD.png" alt="image"></p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFuqII.png" alt="image"></p>
+<h3 id="1-2-基本术语">1.2 基本术语</h3>
+<ul>
+<li>学习（训练）：从数据中学得模型的过程</li>
+<li>训练集：参与模型训练的样本集合</li>
+<li>测试：学得模型后，使用其样本进行预测的过程</li>
+<li>测试集：被预测的样本集合</li>
+<li>“假设”：学得模型对应的关于数据的某种潜在规律</li>
+<li>分类：输出结果是离散值</li>
+<li>回归：输出结果是连续值</li>
+<li>监督学习：训练样本有标记</li>
+<li>无监督学习：训练样本无标记</li>
+<li>泛化能力：学得模型适用于新样本的能力</li>
+<li>独立同分布：样本空间的全体样本都服从一个未知的分布，且相互独立</li>
+</ul>
+<h2 id="2-sklearn">2. sklearn</h2>
+<ul>
+<li>整合了多种机器学习算法</li>
+<li>快速建立模型</li>
+<li>模型接口统一</li>
+<li>使用方便</li>
+</ul>
+<h3 id="2-1-加载datasets模块中数据集">2.1 加载datasets模块中数据集</h3>
+<ul>
+<li>
+<p>datasets模块常用数据集的加载函数与解释如下表所示</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFMn9P.png" alt="NFMn9P.png"></p>
+</li>
+<li>
+<p>使用sklearn进行数据预处理会用到sklearn提供的统一接口——转换器（Transformer）</p>
+</li>
+<li>
+<p>加载后的数据集可以视为一个字典，几乎所有的sklearn数据集均可以使用data、target、feature_names、DESCR分别获取数据集的数据、标签、特征名称和描述信息</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_breast_cancer</span><br><span class="line"></span><br><span class="line">cancer = load_breast_cancer()  <span class="comment"># 将数据集赋值给cancer变量</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据集的长度为：&#x27;</span>, <span class="built_in">len</span>(cancer))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据集的类型为：&#x27;</span>, <span class="built_in">type</span>(cancer))</span><br><span class="line"></span><br><span class="line">cancer_data = cancer[<span class="string">&#x27;data&#x27;</span>]            <span class="comment"># 取出数据集的数据</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据集的数据为：\n&#x27;</span>, cancer_data)</span><br><span class="line"></span><br><span class="line">cancer_target = cancer[<span class="string">&#x27;target&#x27;</span>]        <span class="comment"># 取出数据集的标签</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据集的标签为：\n&#x27;</span>, cancer_target)</span><br><span class="line"></span><br><span class="line">cancer_names = cancer[<span class="string">&#x27;feature_names&#x27;</span>]  <span class="comment"># 取出数据集的特征名</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据集的特征名为：\n&#x27;</span>, cancer_names)</span><br><span class="line"></span><br><span class="line">cancer_desc = cancer[<span class="string">&#x27;DESCR&#x27;</span>]           <span class="comment"># 取出数据集的描述信息</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据集的描述信息为：\n&#x27;</span>, cancer_desc)</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-将数据集划分为训练集和测试集">2.2 将数据集划分为训练集和测试集</h3>
+<ul>
+<li>
+<p>train_test_split函数</p>
+<ul>
+<li>sklearn的model_selection模块提供了train_test_split函数，能够对数据集进行拆分</li>
+<li>sklearn.model_selection.train_test_split(*arrays, **options)</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFQPCq.png" alt="NFQPCq.png"></p>
+<ul>
+<li>
+<p>该函数根据传入的数据，分别将传入的数据划分为训练集和测试集</p>
+</li>
+<li>
+<p>如果传入的是1组数据，那么生成的就是这一组数据随机划分后训练集和测试集，总共2组。</p>
+<p>如果传入的是2组数据，则生成的训练集和测试集分别2组，总共4组</p>
+</li>
+<li>
+<p>该函数是最常用的数据划分方法，在model_selection模块中还提供了其他数据集划分的函数，如PredefinedSplit，ShuffleSplit等</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_breast_cancer</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">cancer = load_breast_cancer()           <span class="comment"># 将数据集赋值给cancer变量</span></span><br><span class="line">cancer_data = cancer[<span class="string">&#x27;data&#x27;</span>]            <span class="comment"># 取出数据集的数据</span></span><br><span class="line">cancer_target = cancer[<span class="string">&#x27;target&#x27;</span>]        <span class="comment"># 取出数据集的标签</span></span><br><span class="line">cancer_names = cancer[<span class="string">&#x27;feature_names&#x27;</span>]  <span class="comment"># 取出数据集的特征名</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;原始数据集数据的形状为：&#x27;</span>, cancer_data.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;原始数据集标签的形状为&#x27;</span>, cancer_target.shape)</span><br><span class="line"></span><br><span class="line">cancer_data_train, cancer_data_test, \</span><br><span class="line">cancer_target_train, cancer_target_test = \</span><br><span class="line">    train_test_split(cancer_data, cancer_target,</span><br><span class="line">                     test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;训练集数据的形状为：&#x27;</span>, cancer_data_train.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;训练集标签的形状为：&#x27;</span>, cancer_target_train.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;测试集数据的形状为：&#x27;</span>, cancer_data_test.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;测试集标签的形状为：&#x27;</span>, cancer_target_test.shape)</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-使用sklearn转换器进行数据预处理">2.3 使用sklearn转换器进行数据预处理</h3>
+<ul>
+<li>
+<p>sklearn把相关的功能封装为转换器（transformer）</p>
+</li>
+<li>
+<p>使用sklearn转换器能够实现对传入的Numpy数组进行标准化处理、归一化处理、二值化处理、PCA降维等操作</p>
+</li>
+<li>
+<p>sklearn转换器的三个方法</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFlBk9.png" alt="image"></p>
+</li>
+<li>
+<p>sklearn部分预处理函数与其作用</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFl6l6.png" alt="image"></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_breast_cancer</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取数据</span></span><br><span class="line">cancer = load_breast_cancer()           <span class="comment"># 将数据集赋值给cancer变量</span></span><br><span class="line">cancer_data = cancer[<span class="string">&#x27;data&#x27;</span>]            <span class="comment"># 取出数据集的数据</span></span><br><span class="line">cancer_target = cancer[<span class="string">&#x27;target&#x27;</span>]        <span class="comment"># 取出数据集的标签</span></span><br><span class="line">cancer_names = cancer[<span class="string">&#x27;feature_names&#x27;</span>]  <span class="comment"># 取出数据集的特征名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 划分数据集</span></span><br><span class="line">cancer_data_train, cancer_data_test, \</span><br><span class="line">cancer_target_train, cancer_target_test = \</span><br><span class="line">    train_test_split(cancer_data, cancer_target,</span><br><span class="line">                     test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预处理：离差标准化</span></span><br><span class="line">Scaler = MinMaxScaler().fit(cancer_data_train)              <span class="comment"># 生成规则</span></span><br><span class="line">cancer_trainScaler = Scaler.transform(cancer_data_train)    <span class="comment"># 将规则应用于训练集</span></span><br><span class="line">cancer_testScaler = Scaler.transform(cancer_data_test)      <span class="comment"># 将规则应用于测试集</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;离差标准化前训练集数据的最小值为：&#x27;</span>, np.<span class="built_in">min</span>(cancer_data_train))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;离差标准化后训练集数据的最小值为：&#x27;</span>, np.<span class="built_in">min</span>(cancer_trainScaler))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;离差标准化前训练集数据的最大值为：&#x27;</span>, np.<span class="built_in">max</span>(cancer_data_train))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;离差标准化后训练集数据的最大值为：&#x27;</span>, np.<span class="built_in">max</span>(cancer_trainScaler))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;离差标准化前测试集数据的最小值为：&#x27;</span>, np.<span class="built_in">min</span>(cancer_data_test))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;离差标准化后测试集数据的最小值为：&#x27;</span>, np.<span class="built_in">min</span>(cancer_testScaler))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;离差标准化前测试集数据的最大值为：&#x27;</span>, np.<span class="built_in">max</span>(cancer_data_test))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;离差标准化后测试集数据的最大值为：&#x27;</span>, np.<span class="built_in">max</span>(cancer_testScaler))</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-使用sklearn估计器构建分类模型">2.4 使用sklearn估计器构建分类模型</h3>
+<ul>
+<li>
+<p>分类算法的实现过程</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFlH6f.png" alt="image"></p>
+</li>
+<li>
+<p>sklearn估计器</p>
+<ul>
+<li>需要sklearn估计器（estimator）</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/06/16/NF1FnU.png" alt="image"></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_breast_cancer</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score, precision_score, recall_score, f1_score, classification_report</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取数据</span></span><br><span class="line">cancer = load_breast_cancer()           <span class="comment"># 将数据集赋值给cancer变量</span></span><br><span class="line">cancer_data = cancer[<span class="string">&#x27;data&#x27;</span>]            <span class="comment"># 取出数据集的数据</span></span><br><span class="line">cancer_target = cancer[<span class="string">&#x27;target&#x27;</span>]        <span class="comment"># 取出数据集的标签</span></span><br><span class="line">cancer_names = cancer[<span class="string">&#x27;feature_names&#x27;</span>]  <span class="comment"># 取出数据集的特征名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 划分数据集</span></span><br><span class="line">cancer_data_train, cancer_data_test, \</span><br><span class="line">cancer_target_train, cancer_target_test = \</span><br><span class="line">    train_test_split(cancer_data, cancer_target,</span><br><span class="line">                     test_size=<span class="number">0.2</span>, random_state=<span class="number">22</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据标准化</span></span><br><span class="line">stdScaler = StandardScaler().fit(cancer_data_train)         <span class="comment"># 生成规则</span></span><br><span class="line">cancer_trainStd = stdScaler.transform(cancer_data_train)    <span class="comment"># 将规则应用于训练集</span></span><br><span class="line">cancer_testStd = stdScaler.transform(cancer_data_test)      <span class="comment"># 将规则应用于测试集</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立SVM模型</span></span><br><span class="line">svm = SVC().fit(cancer_trainStd, cancer_target_train)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;建立的SVM模型为：\n&#x27;</span>, svm)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预测训练集结果</span></span><br><span class="line">cancer_target_pred = svm.predict(cancer_testStd)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;预测前20个结果为：\n&#x27;</span>, cancer_target_pred[:<span class="number">20</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-误差和过拟合">2.5 误差和过拟合</h3>
+<ul>
+<li>
+<p>真实值和预测值</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NF1WvV.png" alt="image"></p>
+<ul>
+<li>
+<p>误差：模型输出与样本真实值之间的差异</p>
+</li>
+<li>
+<p>错误率：分类错误样本数占总样本数的比例</p>
+</li>
+<li>
+<p>精度：1 - 错误率</p>
+</li>
+<li>
+<p>训练误差：模型在训练集上的误差</p>
+</li>
+<li>
+<p>泛化误差：模型在新样本上的误差</p>
+</li>
+<li>
+<p>目标：得到泛化误差小的模型/学习器</p>
+</li>
+<li>
+<p>实际：新样本未知</p>
+</li>
+<li>
+<p>以经验误差代表泛化误差</p>
+</li>
+<li>
+<p>模型从训练样本中学得适用于所有潜在样本的“普遍规律”</p>
+</li>
+</ul>
+</li>
+<li>
+<p>“过”与“不及”</p>
+<ul>
+<li>过拟合：用力过猛</li>
+<li>欠拟合：用力不足</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFGq8s.png" alt="image"></p>
+</li>
+</ul>
+<h3 id="2-6-评估方法">2.6 评估方法</h3>
+<ul>
+<li>训练集与测试集
+<ul>
+<li>目标：对于模型/学习器的泛化误差进行评估</li>
+<li>专家样本：训练集+测试集</li>
+<li>训练集：训练误差</li>
+<li>测试集：测试误差</li>
+</ul>
+</li>
+<li>独立同分布&amp;互斥</li>
+<li>用测试误差近似表示泛化误差</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFJGsP.png" alt="NFJGsP.png"></p>
+<ul>
+<li>
+<p>评估方法</p>
+<ul>
+<li>留出法</li>
+<li>交叉验证法</li>
+<li>自助法</li>
+</ul>
+</li>
+<li>
+<p>留出法</p>
+<ul>
+<li>训练集+测试集：互斥互补</li>
+<li>训练集训练模型，测试集测试模型</li>
+<li>合理划分、保持比例</li>
+<li>单次留出与多次留出</li>
+<li>多次留出法：如对专家样本随机进行100次训练集/测试集划分，评估结果取平均</li>
+</ul>
+</li>
+<li>
+<p>交叉验证法</p>
+<ul>
+<li>
+<p>K折交叉验证：将专家样本等份划分为K个数据集，轮流用K-1个用于训练，1个用于测试</p>
+</li>
+<li>
+<p>P次K折交叉验证</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFYgXt.png" alt="image"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-7-性能度量">2.7 性能度量</h3>
+<ul>
+<li>
+<p>错误率与精度</p>
+<ul>
+<li>
+<p>错误率：分类错误样本数占总样本数的比例</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFYOBV.png" alt="image"></p>
+</li>
+<li>
+<p>精度：1 - 错误率，分类正确样本数占总样本数的比例</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFtZND.png" alt="image"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>查准率与查全率</p>
+<ul>
+<li>查准率/准确率（precision）：P = TP / (TP + FP)</li>
+<li>查全率/召回率/灵敏度（recall）：R = TP / (TP + FN)</li>
+<li>“1”代表正例，“0”代表反例</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFtNCQ.png" alt="image"></p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFtDbV.png" alt="NFtDbV.png"></p>
+</li>
+<li>
+<p>F1系数</p>
+<ul>
+<li>
+<p>综合查准率与查全率</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFt65F.png" alt="image"></p>
+</li>
+<li>
+<p>更一般的形式</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFtR29.png" alt="image"></p>
+</li>
+<li>
+<p>其中β为正数，度量了查全率对查准率的相对重要性</p>
+<ul>
+<li>β = 1：标准的F1系数</li>
+<li>β &gt; 1：查全率有更大影响</li>
+<li>β &lt; 1：查准率有更大影响</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-8-评价分类模型">2.8 评价分类模型</h3>
+<ul>
+<li>
+<p>分类模型的评价指标</p>
+<ul>
+<li>
+<p>分类模型对测试集进行预测而得出的准确率并不能很好地反映模型的性能，为了有效判断一个预测模型的性能表现，需要结合真实值，计算出精确率、召回率、F1值等指标来衡量</p>
+</li>
+<li>
+<p>分类模型评价方法前4种都是分值越高越好，其使用方法基本相同</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFNSVf.png" alt="image"></p>
+</li>
+<li>
+<p>sklearn的metrics模块还提供了一个能够输出分类模型评价报告的函数</p>
+<ul>
+<li>classfication_report</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_breast_cancer</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score, precision_score, recall_score, f1_score, classification_report</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取数据</span></span><br><span class="line">cancer = load_breast_cancer()           <span class="comment"># 将数据集赋值给cancer变量</span></span><br><span class="line">cancer_data = cancer[<span class="string">&#x27;data&#x27;</span>]            <span class="comment"># 取出数据集的数据</span></span><br><span class="line">cancer_target = cancer[<span class="string">&#x27;target&#x27;</span>]        <span class="comment"># 取出数据集的标签</span></span><br><span class="line">cancer_names = cancer[<span class="string">&#x27;feature_names&#x27;</span>]  <span class="comment"># 取出数据集的特征名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 划分数据集</span></span><br><span class="line">cancer_data_train, cancer_data_test, \</span><br><span class="line">cancer_target_train, cancer_target_test = \</span><br><span class="line">    train_test_split(cancer_data, cancer_target,</span><br><span class="line">                     test_size=<span class="number">0.2</span>, random_state=<span class="number">22</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据标准化</span></span><br><span class="line">stdScaler = StandardScaler().fit(cancer_data_train)         <span class="comment"># 生成规则</span></span><br><span class="line">cancer_trainStd = stdScaler.transform(cancer_data_train)    <span class="comment"># 将规则应用于训练集</span></span><br><span class="line">cancer_testStd = stdScaler.transform(cancer_data_test)      <span class="comment"># 将规则应用于测试集</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立SVM模型</span></span><br><span class="line">svm = SVC().fit(cancer_trainStd, cancer_target_train)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;建立的SVM模型为：\n&#x27;</span>, svm)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预测训练集结果</span></span><br><span class="line">cancer_target_pred = svm.predict(cancer_testStd)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;预测前20个结果为：\n&#x27;</span>, cancer_target_pred[:<span class="number">20</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预测结果的准确率</span></span><br><span class="line">true = np.<span class="built_in">sum</span>(cancer_target_pred == cancer_target_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;预测正确的结果数目：&#x27;</span>, true)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;预测错误的结果数目：&#x27;</span>, cancer_target_test.shape[<span class="number">0</span>] - true)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;预测正确的结果数目：&#x27;</span>, true / cancer_target_test.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;准确率为：&#x27;</span>, accuracy_score(cancer_target_test, cancer_target_pred))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;精度为：&#x27;</span>, precision_score(cancer_target_test, cancer_target_pred))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;召回率为：&#x27;</span>, recall_score(cancer_target_test, cancer_target_pred))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;F1系数为：&#x27;</span>, f1_score(cancer_target_test, cancer_target_pred))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;分类报告为：\n&#x27;</span>, classification_report(cancer_target_test, cancer_target_pred))</span><br></pre></td></tr></table></figure>
+<h3 id="2-9-使用sklearn估计器构建回归模型">2.9 使用sklearn估计器构建回归模型</h3>
+<ul>
+<li>
+<p>回归分析方法</p>
+<ul>
+<li>分为学习和预测2个步骤
+<ul>
+<li>学习：通过训练样本数据来拟合回归方程</li>
+<li>预测：利用学习过程中拟合出的回归方程，将测试数据放入方程中求出预测值</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFN0RH.png" alt="image"></p>
+</li>
+<li>
+<p>常用的回归模型</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFNgdf.png" alt="image"></p>
+</li>
+<li>
+<p>sklearn库常用的回归算法函数</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFNHe0.png" alt="image"></p>
+</li>
+<li>
+<p>回归模型评价指标</p>
+<ul>
+<li>回归模型的性能评估不同于分类模型，虽然都是对照真实值进行评估，但由于回归模型的预测结果和真实值都是连续的，所以不能够求取precision、recall和F1值等评价指标。回归模型拥有一套独立的评价指标</li>
+<li>平均绝对误差、均方误差和中值绝对误差的值：越靠近0，模型性能越好</li>
+<li>可解释方差值和R方值：越靠近1，模型性能越好</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFU61J.png" alt="image"></p>
+</li>
+<li>
+<p>评价方法与评价标准</p>
+<ul>
+<li>
+<p>回归任务的评价标准：均方误差</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFURn1.png" alt="image"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-10-使用sklearn估计器构建聚类模型">2.10 使用sklearn估计器构建聚类模型</h3>
+<ul>
+<li>
+<p>聚类</p>
+<ul>
+<li>聚类的输入是一组未被标记的样本，聚类根据数据自身的距离或相似度将它们划分为若干组，划分的原则是组内样本最小化而组间（外部）距离最大化</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFUz4S.png" alt="image"></p>
+</li>
+<li>
+<p>聚类方法类别</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFaCcj.png" alt="image"></p>
+</li>
+<li>
+<p>cluster提供的聚类算法及其适用范围</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFaagH.png" alt="image"></p>
+</li>
+<li>
+<p>评价聚类模型</p>
+<ul>
+<li>
+<p>聚类评价的标准是组内的对象相互之间是相似的（相关的），而不同组中的对象是不同的（不相关的）。即组内的相似度越大，组间差别越大，聚类效果越好</p>
+</li>
+<li>
+<p>sklearn的metrics模块提供的聚类模型评价指标</p>
+<p><img src="https://s1.ax1x.com/2020/06/16/NFdQJS.png" alt="image"></p>
+</li>
+</ul>
+</li>
+</ul>
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">1. 机器学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A6%82%E5%BF%B5"><span class="toc-text">1.1 概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="toc-text">1.2 基本术语</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-sklearn"><span class="toc-text">2. sklearn</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8A%A0%E8%BD%BDdatasets%E6%A8%A1%E5%9D%97%E4%B8%AD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">2.1 加载datasets模块中数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%B0%86%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%92%E5%88%86%E4%B8%BA%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86"><span class="toc-text">2.2 将数据集划分为训练集和测试集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8sklearn%E8%BD%AC%E6%8D%A2%E5%99%A8%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">2.3 使用sklearn转换器进行数据预处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E4%BD%BF%E7%94%A8sklearn%E4%BC%B0%E8%AE%A1%E5%99%A8%E6%9E%84%E5%BB%BA%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B"><span class="toc-text">2.4 使用sklearn估计器构建分类模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E8%AF%AF%E5%B7%AE%E5%92%8C%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-text">2.5 误差和过拟合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="toc-text">2.6 评估方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F"><span class="toc-text">2.7 性能度量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-%E8%AF%84%E4%BB%B7%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B"><span class="toc-text">2.8 评价分类模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9-%E4%BD%BF%E7%94%A8sklearn%E4%BC%B0%E8%AE%A1%E5%99%A8%E6%9E%84%E5%BB%BA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">2.9 使用sklearn估计器构建回归模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10-%E4%BD%BF%E7%94%A8sklearn%E4%BC%B0%E8%AE%A1%E5%99%A8%E6%9E%84%E5%BB%BA%E8%81%9A%E7%B1%BB%E6%A8%A1%E5%9E%8B"><span class="toc-text">2.10 使用sklearn估计器构建聚类模型</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 陈泽豪</div><div class="footer_custom_text">我是豪豪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script></div></body></html>

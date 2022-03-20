@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>networkx整理 | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 基础知识 1.1 介绍 networkx在2002年5月产生，是一个用Python语言开发的图论与复杂网络建模工具，内置了常用的图与复杂网络分析算法，可以方便的进行复杂网络数据分析、仿真建模等工作。 networkx支持创建简单无向图、有向图和多重图；内置许多标准的图论算法，节点可为任意数据；支持任意的边值维度，功能丰富，简单易用。 1.2 作用 利用networkx可以以标准化和非标准化的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="networkx整理">
+<meta property="og:url" content="https://chenzehao.com/49266.html">
+<meta property="og:site_name" content="陈泽豪">
+<meta property="og:description" content="1. 基础知识 1.1 介绍 networkx在2002年5月产生，是一个用Python语言开发的图论与复杂网络建模工具，内置了常用的图与复杂网络分析算法，可以方便的进行复杂网络数据分析、仿真建模等工作。 networkx支持创建简单无向图、有向图和多重图；内置许多标准的图论算法，节点可为任意数据；支持任意的边值维度，功能丰富，简单易用。 1.2 作用 利用networkx可以以标准化和非标准化的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2020-08-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-21T05:46:19.430Z">
+<meta property="article:author" content="陈泽豪">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg"><link rel="canonical" href="https://chenzehao.com/49266"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><meta name="baidu-site-verification" content="code-GhGfwpqKHn"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9191e58322566f7fdcbb360b8eeb1686";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'networkx整理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-21 13:46:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">networkx整理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-08-21T16:00:00.000Z" title="发表于 2020-08-22 00:00:00">2020-08-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:46:19.430Z" title="更新于 2022-01-21 13:46:19">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A4%BE%E4%BA%A4%E7%BD%91%E7%BB%9C-networkx/">社交网络-networkx</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-基础知识">1. 基础知识</h2>
+<h3 id="1-1-介绍">1.1 介绍</h3>
+<p>networkx在2002年5月产生，是一个用Python语言开发的图论与复杂网络建模工具，内置了常用的图与复杂网络分析算法，可以方便的进行复杂网络数据分析、仿真建模等工作。</p>
+<p>networkx支持创建简单无向图、有向图和多重图；内置许多标准的图论算法，节点可为任意数据；支持任意的边值维度，功能丰富，简单易用。</p>
+<h3 id="1-2-作用">1.2 作用</h3>
+<p>利用networkx可以以标准化和非标准化的数据格式存储网络、生成多种随机网络和经典网络、分析网络结构、建立网络模型、设计新的网络算法、进行网络绘制等。</p>
+<h3 id="1-3-Graph">1.3 Graph</h3>
+<ul>
+<li><strong>Graph的定义</strong></li>
+</ul>
+<p>Graph是用点和线来刻画离散事物集合中的每对事物间以某种方式相联系的数学模型。</p>
+<p>网络作为图的一个重要领域，包含的概念与定义更多，如有向图网络（Directed Graphs and Networks）、无向图网络（Undirected）等概念。</p>
+<p>Graph在现实世界中随处可见，如交通运输图、旅游图、流程图等。此处我们只考虑由点和线所组成的图。</p>
+<p>利用图可以描述现实生活中的许多事物，如用点可以表示交叉口，点之间的连线表示路径，这样就可以轻而易举的描绘出一个交通运输网络。</p>
+<ul>
+<li><strong>Graph的结构</strong></li>
+</ul>
+<p>根据Graph的定义，一个Graph包含一个节点集合和一个边集。</p>
+<p>在NetworkX中，一个节点可以是任意hash对象（除了None对象），一条边也可以关联任意的对象,像一个文本字符串，一幅图像，一个XML对象，甚至是另一个图或任意定制的节点对象。</p>
+<p>**注意：**Python中的None对象是不可以作为节点的类型的。</p>
+<p>节点与边能够存储任意类型字典的属性和任意其他丰富类型的数据。</p>
+<ul>
+<li><strong>Graph的分类</strong>
+<ul>
+<li><strong>Graph</strong>：指无向图（undirected Graph），即忽略了两节点间边的方向。</li>
+<li><strong>DiGraph</strong>：指有向图（directed Graph），即考虑了边的有向性。</li>
+<li><strong>MultiGraph</strong>：指多重无向图，即两个结点之间的边数多于一条，又允许顶点通过同一条边和自己关联。</li>
+<li><strong>MultiDiGraph</strong>：多重图的有向版本。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">G = nx.Graph() <span class="comment"># 创建无向图</span></span><br><span class="line"></span><br><span class="line">G = nx.DiGraph() <span class="comment"># 创建有向图</span></span><br><span class="line"></span><br><span class="line">G = nx.MultiGraph() <span class="comment"># 创建多重无向图</span></span><br><span class="line"></span><br><span class="line">G = nx.MultiDigraph() <span class="comment"># 创建多重有向图</span></span><br><span class="line"></span><br><span class="line">G.clear() <span class="comment">#清空图</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-基本操作-2">2. 基本操作</h2>
+<h3 id="2-1-无向图">2.1 无向图</h3>
+<ul>
+<li>
+<p><strong>节点</strong></p>
+<p>如果添加的节点和边是已经存在的，是不会报错的，NetworkX会自动忽略掉已经存在的边和节点的添加。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加节点</span></span><br><span class="line"><span class="keyword">import</span> networkx <span class="keyword">as</span> nx</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">G = nx.Graph()                          <span class="comment"># 建立一个空的无向图G</span></span><br><span class="line">G.add_node(<span class="string">&#x27;a&#x27;</span>)                         <span class="comment"># 添加一个节点1</span></span><br><span class="line">G.add_nodes_from([<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>])  <span class="comment"># 加点集合</span></span><br><span class="line">nx.add_cycle(G, [<span class="string">&#x27;f&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;h&#x27;</span>, <span class="string">&#x27;j&#x27;</span>])   <span class="comment"># 加环</span></span><br><span class="line">H = nx.path_graph(<span class="number">10</span>)                   <span class="comment"># 返回由10个节点挨个连接的无向图，所以有9条边</span></span><br><span class="line">G.add_nodes_from(H)                     <span class="comment"># 创建一个子图H加入G</span></span><br><span class="line">G.add_node(H)                           <span class="comment"># 直接将图作为节点</span></span><br><span class="line"></span><br><span class="line">nx.draw(G, with_labels=<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2020/08/17/deS4rn.png" alt="Figure 1"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 访问节点</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;图中所有的节点&#x27;</span>, G.nodes())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;图中节点的个数&#x27;</span>, G.number_of_nodes())</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出：</span></span><br><span class="line"><span class="string">图中所有的节点 [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;f&#x27;, &#x27;g&#x27;, &#x27;h&#x27;, &#x27;j&#x27;, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, &lt;networkx.classes.graph.Graph object at 0x0000023CD7E08708&gt;]</span></span><br><span class="line"><span class="string">图中节点的个数 20</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除节点</span></span><br><span class="line"></span><br><span class="line">G.remove_node(<span class="number">1</span>)    <span class="comment">#删除指定节点</span></span><br><span class="line">G.remove_nodes_from([<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>])    <span class="comment">#删除集合中的节点</span></span><br><span class="line"></span><br><span class="line">nx.draw(G, with_labels=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2020/08/17/depmZt.png" alt="Figure 1"></p>
+<ul>
+<li><strong>边</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加边</span></span><br><span class="line"></span><br><span class="line">F = nx.Graph()      <span class="comment"># 创建无向图</span></span><br><span class="line">F.add_edge(<span class="number">11</span>, <span class="number">12</span>)  <span class="comment"># 一次添加一条边</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line">e = (<span class="number">13</span>, <span class="number">14</span>)    <span class="comment"># e是一个元组</span></span><br><span class="line">F.add_edge(*e)  <span class="comment"># 这是python中解包裹的过程</span></span><br><span class="line"></span><br><span class="line">F.add_edges_from([(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">1</span>, <span class="number">3</span>)])  <span class="comment"># 通过添加list来添加多条边</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过添加任何ebunch来添加边</span></span><br><span class="line">F.add_edges_from(H.edges())  <span class="comment"># 不能写作F.add_edges_from(H)</span></span><br><span class="line"></span><br><span class="line">nx.draw(F, with_labels=<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2020/08/17/depdiT.png" alt="Figure 1"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 访问边</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;图中所有的边&#x27;</span>, F.edges())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;图中边的个数&#x27;</span>, F.number_of_edges())</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出：</span></span><br><span class="line"><span class="string">图中所有的边 [(11, 12), (13, 14), (1, 2), (1, 3), (1, 0), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9)]</span></span><br><span class="line"><span class="string">图中边的个数 12</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 快速遍历每一条边，可以使用邻接迭代器实现，对于无向图，每一条边相当于两条有向边</span></span><br><span class="line">FG = nx.Graph()</span><br><span class="line">FG.add_weighted_edges_from([(<span class="number">1</span>, <span class="number">2</span>, <span class="number">0.125</span>), (<span class="number">1</span>, <span class="number">3</span>, <span class="number">0.75</span>), (<span class="number">2</span>, <span class="number">4</span>, <span class="number">1.2</span>), (<span class="number">3</span>, <span class="number">4</span>, <span class="number">0.275</span>)])</span><br><span class="line"><span class="keyword">for</span> n, nbrs <span class="keyword">in</span> FG.adjacency():</span><br><span class="line">    <span class="keyword">for</span> nbr, eattr <span class="keyword">in</span> nbrs.items():</span><br><span class="line">        data = eattr[<span class="string">&#x27;weight&#x27;</span>]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;(%d, %d, %0.3f)&#x27;</span> % (n, nbr, data))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;***********************************&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 筛选weight小于0.5的边：</span></span><br><span class="line">FG = nx.Graph()</span><br><span class="line">FG.add_weighted_edges_from([(<span class="number">1</span>, <span class="number">2</span>, <span class="number">0.125</span>), (<span class="number">1</span>, <span class="number">3</span>, <span class="number">0.75</span>), (<span class="number">2</span>, <span class="number">4</span>, <span class="number">1.2</span>), (<span class="number">3</span>, <span class="number">4</span>, <span class="number">0.275</span>)])</span><br><span class="line"><span class="keyword">for</span> n, nbrs <span class="keyword">in</span> FG.adjacency():</span><br><span class="line">    <span class="keyword">for</span> nbr, eattr <span class="keyword">in</span> nbrs.items():</span><br><span class="line">        data = eattr[<span class="string">&#x27;weight&#x27;</span>]</span><br><span class="line">        <span class="keyword">if</span> data &lt; <span class="number">0.5</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;(%d, %d, %0.3f)&#x27;</span> % (n, nbr, data))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;***********************************&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一种方便的访问所有边的方法:</span></span><br><span class="line"><span class="keyword">for</span> u, v, d <span class="keyword">in</span> FG.edges(data=<span class="string">&#x27;weight&#x27;</span>):</span><br><span class="line">    <span class="built_in">print</span>((u, v, d))</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出：</span></span><br><span class="line"><span class="string">(1, 2, 0.125)</span></span><br><span class="line"><span class="string">(1, 3, 0.750)</span></span><br><span class="line"><span class="string">(2, 1, 0.125)</span></span><br><span class="line"><span class="string">(2, 4, 1.200)</span></span><br><span class="line"><span class="string">(3, 1, 0.750)</span></span><br><span class="line"><span class="string">(3, 4, 0.275)</span></span><br><span class="line"><span class="string">(4, 2, 1.200)</span></span><br><span class="line"><span class="string">(4, 3, 0.275)</span></span><br><span class="line"><span class="string">***********************************</span></span><br><span class="line"><span class="string">(1, 2, 0.125)</span></span><br><span class="line"><span class="string">(2, 1, 0.125)</span></span><br><span class="line"><span class="string">(3, 4, 0.275)</span></span><br><span class="line"><span class="string">(4, 3, 0.275)</span></span><br><span class="line"><span class="string">***********************************</span></span><br><span class="line"><span class="string">(1, 2, 0.125)</span></span><br><span class="line"><span class="string">(1, 3, 0.75)</span></span><br><span class="line"><span class="string">(2, 4, 1.2)</span></span><br><span class="line"><span class="string">(3, 4, 0.275)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除边</span></span><br><span class="line"></span><br><span class="line">F.remove_edge(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">F.remove_edges_from([(<span class="number">11</span>, <span class="number">12</span>), (<span class="number">13</span>, <span class="number">14</span>)])</span><br><span class="line"></span><br><span class="line">nx.draw(F, with_labels=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2020/08/17/dep5Se.png" alt="Figure 1"></p>
+<ul>
+<li><strong>属性</strong></li>
+</ul>
+<p>属性诸如weight, labels, colors, 或者任何对象，你都可以附加到图、节点或边上。</p>
+<p>对于每一个图、节点和边都可以在关联的属性字典中保存一个（多个）键-值对。</p>
+<p>默认情况下这些是一个空的字典，但是我们可以增加或者是改变这些属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图的属性</span></span><br><span class="line"></span><br><span class="line">G = nx.Graph(day=<span class="string">&#x27;Monday&#x27;</span>)  <span class="comment"># 可以在创建图时分配图的属性</span></span><br><span class="line"><span class="built_in">print</span>(G.graph)</span><br><span class="line"></span><br><span class="line">G.graph[<span class="string">&#x27;day&#x27;</span>] = <span class="string">&#x27;Friday&#x27;</span>   <span class="comment"># 也可以修改已有的属性</span></span><br><span class="line"><span class="built_in">print</span>(G.graph)</span><br><span class="line"></span><br><span class="line">G.graph[<span class="string">&#x27;name&#x27;</span>] = <span class="string">&#x27;time&#x27;</span>    <span class="comment"># 可以随时添加新的属性到图中</span></span><br><span class="line"><span class="built_in">print</span>(G.graph)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出：</span></span><br><span class="line"><span class="string">&#123;&#x27;day&#x27;: &#x27;Monday&#x27;&#125;</span></span><br><span class="line"><span class="string">&#123;&#x27;day&#x27;: &#x27;Friday&#x27;&#125;</span></span><br><span class="line"><span class="string">&#123;&#x27;day&#x27;: &#x27;Friday&#x27;, &#x27;name&#x27;: &#x27;time&#x27;&#125;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 节点的属性</span></span><br><span class="line"></span><br><span class="line">G = nx.Graph(day=<span class="string">&#x27;Monday&#x27;</span>)</span><br><span class="line">G.add_node(<span class="number">1</span>, index=<span class="string">&#x27;1th&#x27;</span>)      <span class="comment"># 在添加节点时分配节点属性</span></span><br><span class="line"><span class="built_in">print</span>(G.nodes(data=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">G.nodes[<span class="number">1</span>][<span class="string">&#x27;index&#x27;</span>] = <span class="string">&#x27;0th&#x27;</span>     <span class="comment"># 通过G.node[][]来添加或修改属性</span></span><br><span class="line"><span class="built_in">print</span>(G.nodes(data=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">G.add_nodes_from([<span class="number">2</span>, <span class="number">3</span>], index=<span class="string">&#x27;2/3th&#x27;</span>)  <span class="comment"># 从集合中添加节点时分配属性</span></span><br><span class="line"><span class="built_in">print</span>(G.nodes(data=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(G.nodes(data=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出：</span></span><br><span class="line"><span class="string">[(1, &#123;&#x27;index&#x27;: &#x27;1th&#x27;&#125;)]</span></span><br><span class="line"><span class="string">[(1, &#123;&#x27;index&#x27;: &#x27;0th&#x27;&#125;)]</span></span><br><span class="line"><span class="string">[(1, &#123;&#x27;index&#x27;: &#x27;0th&#x27;&#125;), (2, &#123;&#x27;index&#x27;: &#x27;2/3th&#x27;&#125;), (3, &#123;&#x27;index&#x27;: &#x27;2/3th&#x27;&#125;)]</span></span><br><span class="line"><span class="string">[(1, &#123;&#x27;index&#x27;: &#x27;0th&#x27;&#125;), (2, &#123;&#x27;index&#x27;: &#x27;2/3th&#x27;&#125;), (3, &#123;&#x27;index&#x27;: &#x27;2/3th&#x27;&#125;)]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 边的属性</span></span><br><span class="line"></span><br><span class="line">G = nx.Graph(day=<span class="string">&#x27;manday&#x27;</span>)</span><br><span class="line">G.add_edge(<span class="number">1</span>, <span class="number">2</span>, weight=<span class="number">10</span>)                 <span class="comment"># 在添加边时分配属性</span></span><br><span class="line"><span class="built_in">print</span>(G.edges(data=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">G.add_edges_from([(<span class="number">1</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">5</span>)], <span class="built_in">len</span>=<span class="number">22</span>)  <span class="comment"># 从集合中添加边时分配属性</span></span><br><span class="line"><span class="built_in">print</span>(G.edges(data=<span class="string">&#x27;len&#x27;</span>))</span><br><span class="line"></span><br><span class="line">G.add_edges_from([(<span class="number">3</span>, <span class="number">4</span>, &#123;<span class="string">&#x27;hight&#x27;</span>: <span class="number">10</span>&#125;), (<span class="number">1</span>, <span class="number">4</span>, &#123;<span class="string">&#x27;high&#x27;</span>: <span class="string">&#x27;unknow&#x27;</span>&#125;)])</span><br><span class="line"><span class="built_in">print</span>(G.edges(data=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">G[<span class="number">1</span>][<span class="number">2</span>][<span class="string">&#x27;weight&#x27;</span>] = <span class="number">100000</span>  <span class="comment"># 通过G[][][]来添加或修改属性</span></span><br><span class="line"><span class="built_in">print</span>(G.edges(data=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出：</span></span><br><span class="line"><span class="string">[(1, 2, &#123;&#x27;weight&#x27;: 10&#125;)]</span></span><br><span class="line"><span class="string">[(1, 2, None), (1, 3, 22), (4, 5, 22)]</span></span><br><span class="line"><span class="string">[(1, 2, &#123;&#x27;weight&#x27;: 10&#125;), (1, 3, &#123;&#x27;len&#x27;: 22&#125;), (1, 4, &#123;&#x27;high&#x27;: &#x27;unknow&#x27;&#125;), (3, 4, &#123;&#x27;hight&#x27;: 10&#125;), (4, 5, &#123;&#x27;len&#x27;: 22&#125;)]</span></span><br><span class="line"><span class="string">[(1, 2, &#123;&#x27;weight&#x27;: 100000&#125;), (1, 3, &#123;&#x27;len&#x27;: 22&#125;), (1, 4, &#123;&#x27;high&#x27;: &#x27;unknow&#x27;&#125;), (3, 4, &#123;&#x27;hight&#x27;: 10&#125;), (4, 5, &#123;&#x27;len&#x27;: 22&#125;)]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：</p>
+<p>注意什么时候使用‘=’，什么时候使用‘:’；什么时候有引号什么时候没有引号。</p>
+<p>特殊属性weight应该是一个数值型的，并且在算法需要使用weight时保存该数值。</p>
+<h3 id="2-2-其他图">2.2 其他图</h3>
+<p>有向图和多重图的基本操作与无向图一致。</p>
+<p>无向图与有向图之间可以相互转换，转化方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 有向图转化成无向图</span></span><br><span class="line"></span><br><span class="line">H = DG.to_undirected()</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">H = nx.Graph(DG)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 无向图转化成有向图</span></span><br><span class="line"></span><br><span class="line">F = H.to_directed()</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">F = nx.DiGraph(H)</span><br></pre></td></tr></table></figure>
+<h2 id="3-Functions">3. Functions</h2>
+<h3 id="3-1-图">3.1 图</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>degree(G[, nbunch, weight])</td>
+<td>返回单个节点或nbunch节点的度数视图</td>
+</tr>
+<tr>
+<td>degree_histogram(G)</td>
+<td>返回每个度值的频率列表</td>
+</tr>
+<tr>
+<td>density(G)</td>
+<td>返回图的密度</td>
+</tr>
+<tr>
+<td>info(G[, n])</td>
+<td>打印图G或节点n的简短信息摘要</td>
+</tr>
+<tr>
+<td>create_empty_copy(G[, with_data])</td>
+<td>返回图G删除所有的边的拷贝</td>
+</tr>
+<tr>
+<td>is_directed(G)</td>
+<td>如果图是有向的，返回true</td>
+</tr>
+<tr>
+<td>add_star(G_to_add_to, nodes_for_star, **attr)</td>
+<td>在图形G_to_add_to上添加一个星形</td>
+</tr>
+<tr>
+<td>add_path(G_to_add_to, nodes_for_path, **attr)</td>
+<td>在图G_to_add_to中添加一条路径</td>
+</tr>
+<tr>
+<td>add_cycle(G_to_add_to, nodes_for_cycle, **attr)</td>
+<td>向图形G_to_add_to添加一个循环</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-2-节点">3.2 节点</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nodes(G)</td>
+<td>在图节点上返回一个迭代器</td>
+</tr>
+<tr>
+<td>number_of_nodes(G)</td>
+<td>返回图中节点的数量</td>
+</tr>
+<tr>
+<td>all_neighbors(graph, node)</td>
+<td>返回图中节点的所有邻居</td>
+</tr>
+<tr>
+<td>non_neighbors(graph, node)</td>
+<td>返回图中没有邻居的节点</td>
+</tr>
+<tr>
+<td>common_neighbors(G, u, v)</td>
+<td>返回图中两个节点的公共邻居</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-3-边">3.3 边</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>edges(G[, nbunch])</td>
+<td>返回与nbunch中的节点相关的边的视图</td>
+</tr>
+<tr>
+<td>number_of_edges(G)</td>
+<td>返回图中边的数目</td>
+</tr>
+<tr>
+<td>non_edges(graph)</td>
+<td>返回图中不存在的边</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-4-实例：在networkx中列出特定的节点或边缘">3.4 实例：在networkx中列出特定的节点或边缘</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> networkx <span class="keyword">as</span> nx</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">G = nx.DiGraph()</span><br><span class="line">G.add_edges_from([(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;n1&#x27;</span>), (<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;n2&#x27;</span>), (<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;n3&#x27;</span>)])</span><br><span class="line">G.add_edges_from([(<span class="string">&#x27;n4&#x27;</span>, <span class="string">&#x27;n41&#x27;</span>), (<span class="string">&#x27;n1&#x27;</span>, <span class="string">&#x27;n11&#x27;</span>), (<span class="string">&#x27;n1&#x27;</span>, <span class="string">&#x27;n12&#x27;</span>), (<span class="string">&#x27;n1&#x27;</span>, <span class="string">&#x27;n13&#x27;</span>)])</span><br><span class="line">G.add_edges_from([(<span class="string">&#x27;n2&#x27;</span>, <span class="string">&#x27;n21&#x27;</span>), (<span class="string">&#x27;n2&#x27;</span>, <span class="string">&#x27;n22&#x27;</span>)])</span><br><span class="line">G.add_edges_from([(<span class="string">&#x27;n13&#x27;</span>, <span class="string">&#x27;n131&#x27;</span>), (<span class="string">&#x27;n22&#x27;</span>, <span class="string">&#x27;n221&#x27;</span>)])</span><br><span class="line">G.add_edges_from([(<span class="string">&#x27;n131&#x27;</span>, <span class="string">&#x27;n221&#x27;</span>), (<span class="string">&#x27;n221&#x27;</span>, <span class="string">&#x27;n131&#x27;</span>)])</span><br><span class="line">G.add_node(<span class="string">&#x27;n5&#x27;</span>)</span><br><span class="line">nx.draw(G, with_labels=<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2020/08/17/de9w7t.png" alt="Figure 1"></p>
+<ol>
+<li>使用out_degree函数查找所有带有子项的节点：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[k <span class="keyword">for</span> k,v <span class="keyword">in</span> G.out_degree().iteritems() <span class="keyword">if</span> v &gt; <span class="number">0</span>]</span><br><span class="line">[<span class="string">&#x27;n13&#x27;</span>, <span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;n131&#x27;</span>, <span class="string">&#x27;n1&#x27;</span>, <span class="string">&#x27;n22&#x27;</span>, <span class="string">&#x27;n2&#x27;</span>, <span class="string">&#x27;n221&#x27;</span>, <span class="string">&#x27;n4&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>所有没有孩子的节点：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[k <span class="keyword">for</span> k,v <span class="keyword">in</span> G.out_degree().iteritems() <span class="keyword">if</span> v == <span class="number">0</span>]</span><br><span class="line">[<span class="string">&#x27;n12&#x27;</span>, <span class="string">&#x27;n11&#x27;</span>, <span class="string">&#x27;n3&#x27;</span>, <span class="string">&#x27;n41&#x27;</span>, <span class="string">&#x27;n21&#x27;</span>, <span class="string">&#x27;n5&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>所有孤儿节点，即度数为0的节点：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[k <span class="keyword">for</span> k,v <span class="keyword">in</span> G.degree().iteritems() <span class="keyword">if</span> v == <span class="number">0</span>]</span><br><span class="line">[<span class="string">&#x27;n5&#x27;</span>] </span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>超过2个孩子的节点：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[k <span class="keyword">for</span> k,v <span class="keyword">in</span> G.out_degree().iteritems() <span class="keyword">if</span> v &gt; <span class="number">2</span>]</span><br><span class="line">[<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;n1&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="4-经典图论算法">4. 经典图论算法</h2>
+<h3 id="4-1-最短路径">4.1 最短路径</h3>
+<p><strong>函数调用：</strong></p>
+<p>dijkstra_path(G, source, target, weight=‘weight’)       ————求最短路径</p>
+<p>dijkstra_path_length(G, source, target, weight=‘weight’)   ————求最短距离</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> networkx <span class="keyword">as</span> nx</span><br><span class="line"><span class="keyword">import</span> pylab</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义网络</span></span><br><span class="line">row = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">6</span>])</span><br><span class="line">col = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])</span><br><span class="line">value = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;生成一个空的有向图&#x27;</span>)</span><br><span class="line">G = nx.DiGraph()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;为这个网络添加节点...&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, np.size(col) + <span class="number">1</span>):</span><br><span class="line">    G.add_node(i)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;在网络中添加带权中的边...&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(np.size(row)):</span><br><span class="line">    G.add_weighted_edges_from([(row[i], col[i], value[i])])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;给网路设置布局...&#x27;</span>)</span><br><span class="line">pos = nx.shell_layout(G)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;画出网络图像：&#x27;</span>)</span><br><span class="line">nx.draw(G, pos, with_labels=<span class="literal">True</span>, node_color=<span class="string">&#x27;white&#x27;</span>, edge_color=<span class="string">&#x27;red&#x27;</span>, node_size=<span class="number">400</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">pylab.title(<span class="string">&#x27;Self_Define Net&#x27;</span>, fontsize=<span class="number">15</span>)</span><br><span class="line">pylab.show()</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Shortest Path with dijkstra_path</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;dijkstra方法寻找最短路径：&#x27;</span>)</span><br><span class="line">path = nx.dijkstra_path(G, source=<span class="number">0</span>, target=<span class="number">7</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;节点0到7的路径：&#x27;</span>, path)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;dijkstra方法寻找最短距离：&#x27;</span>)</span><br><span class="line">distance = nx.dijkstra_path_length(G, source=<span class="number">0</span>, target=<span class="number">7</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;节点0到7的距离为：&#x27;</span>, distance)</span><br></pre></td></tr></table></figure>
+<img src="https://images2018.cnblogs.com/blog/1289475/201806/1289475-20180629163329037-738047268.png" alt="img" style="zoom:67%;" />
+<h3 id="4-2-最小生成树">4.2 最小生成树</h3>
+<p>**定义：**一个有 n 个结点的连通图的生成树是原图的极小连通子图，且包含原图中的所有 n 个结点，并且有保持图连通的最少的边。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prim</span>(<span class="params">G, s</span>):</span></span><br><span class="line">    dist = &#123;&#125;   <span class="comment"># dist记录到节点的最小距离</span></span><br><span class="line">    parent = &#123;&#125; <span class="comment"># parent记录最小生成树的双亲表</span></span><br><span class="line">    Q = <span class="built_in">list</span>(G.nodes()) <span class="comment"># Q包含所有未被生成树覆盖的节点</span></span><br><span class="line">    MAXDIST = <span class="number">9999.99</span>    <span class="comment"># MAXDIST表示正无穷，即两节点不邻接</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化数据</span></span><br><span class="line">    <span class="comment"># 所有节点的最小距离设为MAXDIST，父节点设为None</span></span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> G.nodes():</span><br><span class="line">        dist[v] = MAXDIST</span><br><span class="line">        parent[v] = <span class="literal">None</span></span><br><span class="line">    <span class="comment"># 到开始节点s的距离设为0</span></span><br><span class="line">    dist[s] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 不断从Q中取出“最近”的节点加入最小生成树</span></span><br><span class="line">    <span class="comment"># 当Q为空时停止循环，算法结束</span></span><br><span class="line">    <span class="keyword">while</span> Q:</span><br><span class="line">        <span class="comment"># 取出“最近”的节点u，把u加入最小生成树</span></span><br><span class="line">        u = Q[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> Q:</span><br><span class="line">            <span class="keyword">if</span> (dist[v] &lt; dist[u]):</span><br><span class="line">                u = v</span><br><span class="line">        Q.remove(u)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 更新u的邻接节点的最小距离</span></span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> G.adj[u]:</span><br><span class="line">            <span class="keyword">if</span> (v <span class="keyword">in</span> Q) <span class="keyword">and</span> (G[u][v][<span class="string">&#x27;weight&#x27;</span>] &lt; dist[v]):</span><br><span class="line">                parent[v] = u</span><br><span class="line">                dist[v] = G[u][v][<span class="string">&#x27;weight&#x27;</span>]</span><br><span class="line">    <span class="comment"># 算法结束，以双亲表的形式返回最小生成树</span></span><br><span class="line">    <span class="keyword">return</span> parent</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> networkx <span class="keyword">as</span> nx</span><br><span class="line"></span><br><span class="line">g_data = [(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1.3</span>), (<span class="number">1</span>, <span class="number">3</span>, <span class="number">2.1</span>), (<span class="number">1</span>, <span class="number">4</span>, <span class="number">0.9</span>), (<span class="number">1</span>, <span class="number">5</span>, <span class="number">0.7</span>), (<span class="number">1</span>, <span class="number">6</span>, <span class="number">1.8</span>), (<span class="number">1</span>, <span class="number">7</span>, <span class="number">2.0</span>), (<span class="number">1</span>, <span class="number">8</span>, <span class="number">1.8</span>), (<span class="number">2</span>, <span class="number">3</span>, <span class="number">0.9</span>),</span><br><span class="line">          (<span class="number">2</span>, <span class="number">4</span>, <span class="number">1.8</span>), (<span class="number">2</span>, <span class="number">5</span>, <span class="number">1.2</span>), (<span class="number">2</span>, <span class="number">6</span>, <span class="number">2.8</span>), (<span class="number">2</span>, <span class="number">7</span>, <span class="number">2.3</span>), (<span class="number">2</span>, <span class="number">8</span>, <span class="number">1.1</span>), (<span class="number">3</span>, <span class="number">4</span>, <span class="number">2.6</span>), (<span class="number">3</span>, <span class="number">5</span>, <span class="number">1.7</span>), (<span class="number">3</span>, <span class="number">6</span>, <span class="number">2.5</span>),</span><br><span class="line">          (<span class="number">3</span>, <span class="number">7</span>, <span class="number">1.9</span>), (<span class="number">3</span>, <span class="number">8</span>, <span class="number">1.0</span>), (<span class="number">4</span>, <span class="number">5</span>, <span class="number">0.7</span>), (<span class="number">4</span>, <span class="number">6</span>, <span class="number">1.6</span>), (<span class="number">4</span>, <span class="number">7</span>, <span class="number">1.5</span>), (<span class="number">4</span>, <span class="number">8</span>, <span class="number">0.9</span>), (<span class="number">5</span>, <span class="number">6</span>, <span class="number">0.9</span>), (<span class="number">5</span>, <span class="number">7</span>, <span class="number">1.1</span>),</span><br><span class="line">          (<span class="number">5</span>, <span class="number">8</span>, <span class="number">0.8</span>), (<span class="number">6</span>, <span class="number">7</span>, <span class="number">0.6</span>), (<span class="number">6</span>, <span class="number">8</span>, <span class="number">1.0</span>), (<span class="number">7</span>, <span class="number">8</span>, <span class="number">0.5</span>)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw</span>(<span class="params">g</span>):</span></span><br><span class="line">    pos = nx.spring_layout(g)</span><br><span class="line">    nx.draw(g, pos,</span><br><span class="line">            arrows=<span class="literal">True</span>,</span><br><span class="line">            with_labels=<span class="literal">True</span>,</span><br><span class="line">            nodelist=g.nodes(),</span><br><span class="line">            style=<span class="string">&#x27;dashed&#x27;</span>,</span><br><span class="line">            edge_color=<span class="string">&#x27;b&#x27;</span>,</span><br><span class="line">            width=<span class="number">2</span>,</span><br><span class="line">            node_color=<span class="string">&#x27;y&#x27;</span>,</span><br><span class="line">            alpha=<span class="number">0.5</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">g = nx.Graph()</span><br></pre></td></tr></table></figure>
+<img src="https://images2018.cnblogs.com/blog/1289475/201807/1289475-20180701152527972-1400107573.png" alt="img" style="zoom:67%;" />
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tree = prim(g, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">mtg = nx.Graph()</span><br><span class="line">mtg.add_edges_from(tree.items())</span><br><span class="line">mtg.remove_node(<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">draw(mtg)</span><br></pre></td></tr></table></figure>
+<img src="https://images2018.cnblogs.com/blog/1289475/201807/1289475-20180701152629311-1378095268.png" alt="img" style="zoom:67%;" />
+<h3 id="4-3-最大联通子图及联通子图规模排序">4.3 最大联通子图及联通子图规模排序</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> networkx <span class="keyword">as</span> nx</span><br><span class="line"></span><br><span class="line">G = nx.path_graph(<span class="number">4</span>)</span><br><span class="line">G.add_path([<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>])</span><br><span class="line">nx.draw(G, with_labels=<span class="literal">True</span>, label_size=<span class="number">1000</span>, node_size=<span class="number">1000</span>, font_size=<span class="number">20</span>)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># [print(len(c)) for c in sorted(nx.connected_components(G),key=len,reverse=True)]</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">sorted</span>(nx.connected_components(G), key=<span class="built_in">len</span>, reverse=<span class="literal">True</span>):</span><br><span class="line">    <span class="built_in">print</span>(c)        <span class="comment"># 看看返回来的是什么？结果是&#123;0,1,2,3&#125;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(c))  <span class="comment"># 类型是set</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">len</span>(c))   <span class="comment"># 长度分别是4和3（因为reverse=True，降序排列）</span></span><br><span class="line"></span><br><span class="line">largest_components = <span class="built_in">max</span>(nx.connected_components(G), key=<span class="built_in">len</span>)  <span class="comment"># 高效找出最大的联通成分，其实就是sorted里面的No.1</span></span><br><span class="line"><span class="built_in">print</span>(largest_components)  <span class="comment"># 找出最大联通成分，返回是一个set&#123;0,1,2,3&#125;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(largest_components))  <span class="comment"># 4</span></span><br></pre></td></tr></table></figure>
+<img src="https://images2018.cnblogs.com/blog/1289475/201807/1289475-20180703115349101-2133447916.png" alt="img" style="zoom:67%;" />
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">set</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">4</span></span><br><span class="line"><span class="class">&#123;10, 11, 12&#125;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> &#x27;<span class="title">set</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">3</span></span><br><span class="line"><span class="class">&#123;0, 1, 2, 3&#125;</span></span><br><span class="line"><span class="class">4</span></span><br></pre></td></tr></table></figure>
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">1. 基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%8B%E7%BB%8D"><span class="toc-text">1.1 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%BD%9C%E7%94%A8"><span class="toc-text">1.2 作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-Graph"><span class="toc-text">1.3 Graph</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C-2"><span class="toc-text">2. 基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%97%A0%E5%90%91%E5%9B%BE"><span class="toc-text">2.1 无向图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%85%B6%E4%BB%96%E5%9B%BE"><span class="toc-text">2.2 其他图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Functions"><span class="toc-text">3. Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%9B%BE"><span class="toc-text">3.1 图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%8A%82%E7%82%B9"><span class="toc-text">3.2 节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E8%BE%B9"><span class="toc-text">3.3 边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%AE%9E%E4%BE%8B%EF%BC%9A%E5%9C%A8networkx%E4%B8%AD%E5%88%97%E5%87%BA%E7%89%B9%E5%AE%9A%E7%9A%84%E8%8A%82%E7%82%B9%E6%88%96%E8%BE%B9%E7%BC%98"><span class="toc-text">3.4 实例：在networkx中列出特定的节点或边缘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%BB%8F%E5%85%B8%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95"><span class="toc-text">4. 经典图论算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="toc-text">4.1 最短路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-text">4.2 最小生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E6%9C%80%E5%A4%A7%E8%81%94%E9%80%9A%E5%AD%90%E5%9B%BE%E5%8F%8A%E8%81%94%E9%80%9A%E5%AD%90%E5%9B%BE%E8%A7%84%E6%A8%A1%E6%8E%92%E5%BA%8F"><span class="toc-text">4.3 最大联通子图及联通子图规模排序</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 陈泽豪</div><div class="footer_custom_text">我是豪豪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script></div></body></html>

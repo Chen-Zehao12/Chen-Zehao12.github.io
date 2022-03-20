@@ -1,0 +1,853 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>3-Authorization | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 访问控制结构 1.1 访问控制矩阵(ACM)  权限判定复杂度为O(1)O(1)O(1) S: 主体 O: 客体 A: 访问操作     访问控制矩阵是   一个抽象的概念   不太适合直接执行  如果有成千上万个文件和数百个用户(导致数百万个矩阵条目)，那么管理矩阵可能会非常困难。 矩阵很可能是非常稀疏的，因此实现是低效的       访问控制矩阵通常是稀疏的，可以按行或列分解 两种实现，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3-Authorization">
+<meta property="og:url" content="https://chenzehao.com/1173.html">
+<meta property="og:site_name" content="陈泽豪">
+<meta property="og:description" content="1. 访问控制结构 1.1 访问控制矩阵(ACM)  权限判定复杂度为O(1)O(1)O(1) S: 主体 O: 客体 A: 访问操作     访问控制矩阵是   一个抽象的概念   不太适合直接执行  如果有成千上万个文件和数百个用户(导致数百万个矩阵条目)，那么管理矩阵可能会非常困难。 矩阵很可能是非常稀疏的，因此实现是低效的       访问控制矩阵通常是稀疏的，可以按行或列分解 两种实现，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-01-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-21T05:55:45.360Z">
+<meta property="article:author" content="陈泽豪">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg"><link rel="canonical" href="https://chenzehao.com/1173"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><meta name="baidu-site-verification" content="code-GhGfwpqKHn"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9191e58322566f7fdcbb360b8eeb1686";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '3-Authorization',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-21 13:55:45'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">3-Authorization</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-05T16:00:00.000Z" title="发表于 2022-01-06 00:00:00">2022-01-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:55:45.360Z" title="更新于 2022-01-21 13:55:45">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E5%AD%A6/">计算机安全学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>1. 访问控制结构</h1>
+<h2 id="1-1-访问控制矩阵-ACM">1.1 访问控制矩阵(ACM)</h2>
+<ul>
+<li>权限判定复杂度为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></li>
+<li>S: 主体</li>
+<li>O: 客体</li>
+<li>A: 访问操作</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy58m164vmj311e08kdh4.jpg" alt="image-20220107172944808" style="zoom:50%;" />
+<ul>
+<li>
+<p>访问控制矩阵是</p>
+<ul>
+<li>
+<p>一个抽象的概念</p>
+</li>
+<li>
+<p>不太适合直接执行</p>
+<ul>
+<li>如果有成千上万个文件和数百个用户(导致数百万个矩阵条目)，那么管理矩阵可能会非常困难。</li>
+<li>矩阵很可能是非常稀疏的，因此实现是低效的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>访问控制矩阵通常是稀疏的，可以按行或列分解</li>
+<li>两种实现，取决于你如何分解：
+<ul>
+<li>访问控制表</li>
+<li>访问能力表</li>
+</ul>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy58ojw0paj30qa0p00vc.jpg" alt="image-20220107173209474" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy58p62fmgj30zo0eaabr.jpg" alt="image-20220107173245301" style="zoom:50%;" />
+<h2 id="1-2-访问控制功能">1.2 访问控制功能</h2>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy58qj1z5hj30o00oiq5c.jpg" alt="image-20220107173403353" style="zoom:50%;" />
+<h2 id="1-3-访问能力表">1.3 访问能力表</h2>
+<ul>
+<li>专注于主体
+<ul>
+<li>访问权限存储在主体中</li>
+<li>访问控制矩阵的权限行</li>
+</ul>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy58sr845wj30ss03e3yt.jpg" alt="image-20220107173612733" style="zoom:50%;" />
+<ul>
+<li>
+<p>性能和分布式系统安全性之间的良好匹配</p>
+<ul>
+<li>安全策略必须处理漫游问题</li>
+</ul>
+</li>
+<li>
+<p>问题的权限</p>
+<ul>
+<li>
+<p>如何检查谁可能访问一个特定的对象？</p>
+</li>
+<li>
+<p>如何撤销一个权限？</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>权限的保护和真实性
+<ul>
+<li>如果在单个系统中使用
+<ul>
+<li>可以依赖于操作系统的完整性和它所使用的机制</li>
+</ul>
+</li>
+<li>如果通过网络使用
+<ul>
+<li>真实性和保护主要是加密的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-4-访问控制表-ACLs">1.4 访问控制表(ACLs)</h2>
+<ul>
+<li>不需要写没有的权限</li>
+<li>从NULL开始，单调递增</li>
+<li>权限判定复杂度<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mo stretchy="false">[</mo><mi>O</mi><mi>J</mi><mo stretchy="false">]</mo><mo>+</mo><mo stretchy="false">[</mo><mi>S</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">=[OJ] +[S]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mclose">]</span></span></span></span></li>
+<li>专注于客体
+<ul>
+<li>访问权限与对象一起存储</li>
+<li>访问控制矩阵的ACL列</li>
+</ul>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy58xsv8ptj30tq03iglz.jpg" alt="image-20220107174103403" style="zoom:50%;" />
+<ul>
+<li>
+<p>访问权限通常是为用户组定义的</p>
+<ul>
+<li>因为单个主体可能会形成一个巨大的列表</li>
+</ul>
+</li>
+<li>
+<p>ACLs是操作系统安全性的典型代表</p>
+</li>
+<li>
+<p>在UNIX中，ACLs被附加到文件中</p>
+</li>
+</ul>
+<h2 id="1-5-聚合技术">1.5 聚合技术</h2>
+<ul>
+<li>ACLs和访问能力表的用途有限(一个关注主体，另一个关注客体)</li>
+<li>需要聚合主体和客体
+<ul>
+<li>组</li>
+<li>角色</li>
+<li>程序</li>
+<li>数据类型</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-6-组和负面权限">1.6 组和负面权限</h2>
+<ul>
+<li>组是用户和客体之间的中间层</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy591dghkbj30ha07yjru.jpg" alt="image-20220107174429010" style="zoom:50%;" />
+<ul>
+<li>为处理特殊情况，负面授予撤回权限</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy591tm9uwj30h407q74s.jpg" alt="image-20220107174455344" style="zoom:50%;" />
+<h2 id="1-7-基于角色的访问控制-RBAC">1.7 基于角色的访问控制(RBAC)</h2>
+<ul>
+<li>在主体和客体之间可以插入几个中间概念</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy593o529kj30vo0gkabv.jpg" alt="image-20220107174642020" style="zoom:50%;" />
+<ul>
+<li>
+<p>Data types: 数据类型是具有相同结构的一组对象(如银行账户)。</p>
+<ul>
+<li>每个对象都具有特定的数据类型，只能通过为该数据类型定义的过程来访问。</li>
+</ul>
+</li>
+<li>
+<p>Procedures: 具有比读或写更复杂语义的高级访问控制方法</p>
+<ul>
+<li>procedures只能应用于某些数据类型的对象;例如:银行账户之间的资金转账。</li>
+</ul>
+</li>
+<li>
+<p>Roles: 分配给roles的procedures的集合；一个用户可以有多个角色，一个角色可以有多个用户</p>
+</li>
+<li>
+<p>例如</p>
+<ul>
+<li>
+<p>Objects是银行账户</p>
+</li>
+<li>
+<p>Subjects是银行员工</p>
+</li>
+<li>
+<p>银行账户的集合形成了一个数据类型</p>
+</li>
+<li>
+<p>我们定义角色</p>
+<ul>
+<li>Teller</li>
+<li>Clerk</li>
+<li>Administrator</li>
+</ul>
+</li>
+<li>
+<p>我们定义过程</p>
+<ul>
+<li>
+<p>发放账户(CA)</p>
+</li>
+<li>
+<p>代理账户(DA)</p>
+</li>
+<li>
+<p>在账户之间转移资金(TF)</p>
+</li>
+<li>
+<p>创建账号(NA)</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>我们分配过程
+<ul>
+<li>Teller能够做CA和DA</li>
+<li>Clerk能够做TF</li>
+<li>Administrator能够做NA</li>
+<li>Administrator能够做所有的过程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>角色很适合业务中的典型访问控制需求</li>
+<li>角色实现于
+<ul>
+<li>Window NT onwards (as global and local groups)</li>
+<li>IBM’s OS/400</li>
+<li>Oracle 8 onwards</li>
+<li>.NET framework</li>
+</ul>
+</li>
+<li>RBAC没有普遍接受的标准</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy59bi0mpqj30l00n2jsq.jpg" alt="image-20220107175413726" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy59bxbbl5j30ke0n6abm.jpg" alt="image-20220107175438470" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy59c3ywb6j30nm0nu406.jpg" alt="image-20220107175448498" style="zoom:50%;" />
+<ul>
+<li>美国国家标准RBAC</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy59cywmorj30ya0fuwg8.jpg" alt="image-20220107175538405" style="zoom:50%;" />
+<ul>
+<li>银行中的RBAC</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy59d8g515j30xq0kgtak.jpg" alt="image-20220107175553050" style="zoom:50%;" />
+<h2 id="1-8-Lattices">1.8 Lattices</h2>
+<ul>
+<li>假设一个主体只有在主体的标号大于或等于客体的标号时才能观察到客体。</li>
+<li>格是一种数学结构，其中这些问题有独特的答案
+<ul>
+<li>给定两个具有不同标签的客体，一个主体必须被允许观察两个客体的最小标签是什么?</li>
+<li>给定两个有不同标签的主体，一个客体能被两个主体观察到的最大标签是什么?</li>
+</ul>
+</li>
+<li>格是一个部分有序集，其中每一对元素都有一个最大下界和一个最小上界</li>
+</ul>
+<ul>
+<li>
+<p>System Low and System High</p>
+<ul>
+<li>如果a≤b，我们说“a被b支配”或“b支配a”</li>
+<li>如果一个标签被所有其他标签所支配，那么它将被称为System Low</li>
+<li>如果一个标号优于所有其他标号，则称为System High</li>
+<li>什么是System Low和System High在幂集格的例子？</li>
+</ul>
+</li>
+<li>
+<p>A Flat Lattice</p>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy59k96wqzj30p60m2wfj.jpg" alt="image-20220107180238334" style="zoom:50%;" />
+<h1>2. 访问控制模型和策略</h1>
+<ul>
+<li>
+<p>安全策略</p>
+<ul>
+<li>获取企业的安全性需求，或者描述为了实现安全性而必须采取的步骤</li>
+</ul>
+</li>
+<li>
+<p>安全模型</p>
+<ul>
+<li>是安全策略的正式描述</li>
+</ul>
+</li>
+<li>
+<p>例子：信息流策略</p>
+<ul>
+<li>解决保密要求</li>
+<li>我们假设存在一个安全标签格</li>
+<li>使用安全函数为每个主体和客体分配一个安全标签</li>
+<li>当(x)≤(y)时，信息可以从实体x流向实体y
+<ul>
+<li>信息可以从低安全性实体流向高安全性实体</li>
+</ul>
+</li>
+<li>根据信息流原理定义读写访问权限</li>
+</ul>
+</li>
+<li>
+<p>读权限</p>
+<ul>
+<li>信息从一个客体o流向一个主体s</li>
+<li>当(o)≤(s)时，授予读访问权限</li>
+<li>如果您的安全标签大于客体的安全标签，则可以读取该客体</li>
+<li>这个条件在BLP术语中称为“无读取”或简单安全性(ss)属性</li>
+</ul>
+</li>
+<li>
+<p>写权限</p>
+<ul>
+<li>信息从主体s流向客体o</li>
+<li>当(s)≤(o)时，允许写访问
+<ul>
+<li>如果你的安全标签比客体的安全标签小，你可以写入一个客体</li>
+<li>相当反直觉，但有必要防止违反保密等
+<ul>
+<li>一个高度机密的用户正在向一个不安全的打印机写信</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>这个条件在BLP术语中称为“无记录”或∗−属性(星形属性)</li>
+<li>没有读取和写属性是BLP的“强制访问控制”属性</li>
+</ul>
+</li>
+<li>
+<p>Information Flow Blocked by ∗ − Property</p>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy59tpuv5dj311u0mctb7.jpg" alt="image-20220107181141199" style="zoom:50%;" />
+<h2 id="2-1-保密政策">2.1 保密政策</h2>
+<ul>
+<li>概述
+<ul>
+<li>目标：防止未经授权的信息泄露
+<ul>
+<li>处理信息流</li>
+<li>Integrity incidental</li>
+</ul>
+</li>
+<li>多级安全模型是最著名的例子
+<ul>
+<li>Bell-LaPadula Model</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-Bell-LaPadula模型，第一步">2.2 Bell-LaPadula模型，第一步</h2>
+<ul>
+<li>在机密性级别上：不读高，不写低</li>
+</ul>
+<ul>
+<li>安全级别按线性顺序排列
+<ul>
+<li>绝密：最高</li>
+<li>机密</li>
+<li>保密</li>
+<li>非保密：最低</li>
+</ul>
+</li>
+<li>级别包括安全许可L(s)
+<ul>
+<li>客体的安全级别为L(o)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>例如</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy5a0gku8sj30sy0cyq4i.jpg" alt="image-20220107181812480" style="zoom:50%;" />
+<ul>
+<li>Tamara 可以读取所有文件</li>
+<li>Claire 无法阅读人事或电子邮件文件</li>
+<li>Ursula 只能阅读电话名单</li>
+</ul>
+<ul>
+<li>
+<p>Reading Information</p>
+<ul>
+<li>信息向上流动，而不是向下流动
+<ul>
+<li>“读上”不允许，“读下”允许</li>
+</ul>
+</li>
+<li>简单安全条件(步骤1)
+<ul>
+<li>主体s可以在L(o)≤L(s)的情况下读取对象o，且主体s具有读取o的权限
+<ul>
+<li>注:结合强制控制(安全级别关系)和酌情控制(所需许可)</li>
+</ul>
+</li>
+<li>有时被称为“不读上”规则</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>基本安全定理，第一步</p>
+<ul>
+<li>如果系统最初处于安全状态，并且系统的每个转换都满足简单的安全条件，即步骤1和*-属性，即步骤1，那么系统的每个状态都是安全的</li>
+<li>证明:归纳转换的数量</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-Bell-LaPadula模型，第二步">2.3 Bell-LaPadula模型，第二步</h2>
+<ul>
+<li>扩展安全级别的概念以包括类别</li>
+<li>安全级别为(许可，类别设置)</li>
+<li>例如
+<ul>
+<li>( Top Secret, NUC, EUR, US )</li>
+<li>( Confidential, EUR, US )</li>
+<li>( Secret, NUC, US )</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>等级和格</p>
+<ul>
+<li>(A, C)dom(A′, C′) iff A′ ≤ A and C′ ⊆ C Examples
+<ul>
+<li>(Top Secret, NUC, US) dom (Secret, NUC)</li>
+<li>(Secret, NUC, EUR) dom (Confidential,NUC, EUR)</li>
+<li>(Top Secret, NUC) ¬dom (Confidential, EUR)</li>
+</ul>
+</li>
+<li>Let C be set of classifications, K set of categories. Set of security levels L = C × K, dom form lattice
+<ul>
+<li>lub(L) = (max(A), C)</li>
+<li>glb(L) = (min(A), phi)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>等级和排序</p>
+<ul>
+<li>Security levels partially ordered
+<ul>
+<li>Any pair of security levels may (or may not) be related by dom</li>
+</ul>
+</li>
+<li>“dominates”serves the role of “greater than”in step 1
+<ul>
+<li>“greater than”is a total ordering, though</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>读信息</p>
+<ul>
+<li>Information flows up, not down
+<ul>
+<li>“Reads up”disallowed, “reads down”allowed</li>
+</ul>
+</li>
+<li>Simple Security Condition (Step 2)
+<ul>
+<li>Subject s can read object o iff L(s) dom L(o) and s has permission to read o
+<ul>
+<li>Note: combines mandatory control (relationship of security levels) and discretionary control (the required permission)</li>
+</ul>
+</li>
+<li>Sometimes called “no reads up”rule</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>写信息</p>
+<ul>
+<li>Information flows up, not down
+<ul>
+<li>“Writes up”allowed, “writes down”disallowed</li>
+</ul>
+</li>
+<li>*-Property (Step 2)
+<ul>
+<li>Subject s can write object o iff L(o) dom L(s) and s has permission to write o
+<ul>
+<li>Note: combines mandatory control (relationship of security levels) and discretionary control (the required permission)</li>
+</ul>
+</li>
+<li>Sometimes called “no writes down”rule</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>基本安全定理，第2步</p>
+<ul>
+<li>如果系统最初处于安全状态，并且系统的每一次转换都满足简单安全条件(步骤2)和*-属性(步骤2)，那么系统的每一种状态都是安全的
+<ul>
+<li>证明:归纳转换的数量</li>
+<li>在实际的基本安全定理中，自由访问控制被视为第三个属性，简单安全属性和*-属性的表述消除了定义中的自由访问部分，但这里的表达方式更简单。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>BLP例子</p>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy5a95z5fdj30k80oawg6.jpg" alt="image-20220107182634612" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy5a9dyw6nj30ko0ok0ut.jpg" alt="image-20220107182646745" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy5a9ko5skj30us0k0tap.jpg" alt="image-20220107182658186" style="zoom:50%;" />
+<h2 id="2-4-Biba完整性模型">2.4 Biba完整性模型</h2>
+<ul>
+<li>
+<p>Biba模型是在bell-lapadula模型之后开发的，它跟bell-lapadula模型很相似，被用于解决应用程序数据的完整性问题。Bell-lapadula使用安全级别（top secret,secret,sensitive,等），这些安全级别用于保证敏感信息只被授权的个体所访问。Biba模型不关心信息保密性的安全级别，因此它的访问控制不是建立在安全级别上，而是建立在完整性级别上。</p>
+</li>
+<li>
+<p>Biba模型能够防止数据从低完整性级别流向高完整性级别</p>
+</li>
+<li>
+<p>跟Bell-lapadula一样，Biba模型也有三条规则提供这种保护</p>
+<ul>
+<li>
+<p>星完整性规则（*-integrity axiom）</p>
+<ul>
+<li>完整性级别低的主体不能对完整性级别高的客体写数据</li>
+</ul>
+</li>
+<li>
+<p>简单完整性规则（simple integrity axiom）</p>
+<ul>
+<li>完整性级别高的主体不能从完整性级别低的客体读取数据</li>
+</ul>
+</li>
+<li>
+<p>恳求属性规则（invocation property）</p>
+<ul>
+<li>完整性级别低的主体不能从级别高的客体调用程序或服务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>完整性规则上：不写高，不读低，不调高</p>
+</li>
+<li>
+<p>Set of subjects S, objects O, integrity levels I, relation ≤⊆ I × I holding when second dominates first</p>
+</li>
+<li>
+<p>min : I × I → I returns lesser of integrity levels</p>
+</li>
+<li>
+<p>i : S ∪ O → I gives integrity level of entity</p>
+</li>
+<li>
+<p>r:S×Omeanss∈Scanreado∈O</p>
+</li>
+<li>
+<p>w, x defined similarly</p>
+</li>
+</ul>
+<ul>
+<li>
+<p>Intuition for Integrity Levels</p>
+<ul>
+<li>等级越高越机密
+<ul>
+<li>程序能正确运行</li>
+<li>数据是准确和/或可靠的</li>
+</ul>
+</li>
+<li>Note relationship between integrity and trustworthiness</li>
+<li>重点：完整性级别不是安全级别</li>
+</ul>
+</li>
+<li>
+<p>完整性政策：Biba’s Model</p>
+<ul>
+<li>类似于Bell-LaPadula模型
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">s∈S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span> can read <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi><mo>∈</mo><mi>O</mi></mrow><annotation encoding="application/x-tex">o∈O</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">o</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span></span></span></span> iff <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>i</mi><mo stretchy="false">(</mo><mi>o</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">i(s)≤i(o)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">i</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">i</span><span class="mopen">(</span><span class="mord mathnormal">o</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">s∈S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span> can write to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi><mo>∈</mo><mi>O</mi></mrow><annotation encoding="application/x-tex">o∈O</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">o</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span></span></span></span> iff <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false">(</mo><mi>o</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>i</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">i(o)≤i(s)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">i</span><span class="mopen">(</span><span class="mord mathnormal">o</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">i</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>1</mn></msub><mo>∈</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">s_1 ∈S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span> can execute <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>2</mn></msub><mo>∈</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">s_2 ∈S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span> iff <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false">(</mo><msub><mi>s</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo>≤</mo><mi>i</mi><mo stretchy="false">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">i(s_2)≤i(s_1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">i</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">i</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
+</ul>
+</li>
+<li>信息流结果保持不变</li>
+<li>虽然是不同的证据</li>
+</ul>
+</li>
+<li>
+<p>严格完整性策略</p>
+<ul>
+<li>简单完整性: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>≥</mo><mi>I</mi><mo stretchy="false">(</mo><mi>O</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">I(S) ≥ I(O)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mclose">)</span></span></span></span></li>
+<li>完整性约束: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>I</mi><mo stretchy="false">(</mo><mi>O</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">I(S) ≤ I(O)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mclose">)</span></span></span></span></li>
+<li>invocation property: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo stretchy="false">(</mo><mi>S</mi><mn>1</mn><mo stretchy="false">)</mo><mo>≥</mo><mi>I</mi><mo stretchy="false">(</mo><mi>S</mi><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">I(S1) ≥ I(S2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">2</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-5-中国墙模型">2.5 中国墙模型</h2>
+<ul>
+<li>
+<p>问题：</p>
+<ul>
+<li>
+<p>托尼为美国银行提供投资咨询</p>
+</li>
+<li>
+<p>他被要求为Toyland Bank提供投资建议</p>
+</li>
+</ul>
+</li>
+<li>
+<p>利益冲突不能接受，因为他给任何一家银行的通知将影响另一家银行</p>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy5ahs7oatj311g0nemzx.jpg" alt="image-20220107183451382" style="zoom:50%;" />
+<h3 id="2-5-1-和Bell-LaPadula比较">2.5.1 和Bell-LaPadula比较</h3>
+<ul>
+<li>根本不同
+<ul>
+<li>CW没有安全标签，B-LP有</li>
+<li>CW有过去访问的概念，B-LP没有</li>
+</ul>
+</li>
+<li>Bell-LaPadula可以捕获任何时间的状态
+<ul>
+<li>每对(COI, CD)都获得安全类别</li>
+<li>Two clearances, S (sanitized) and U (unsanitized) S do m U</li>
+<li>Subjects assigned clearance for compartments without multiple categories corresponding to CDs in same COI class</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>Bell-LaPadula不能跟踪随时间的变化</p>
+<ul>
+<li>
+<p>苏珊病了，安娜需要接手</p>
+<ul>
+<li>C-W的历史让安娜知道她是否可以</li>
+</ul>
+<ul>
+<li>No way for Bell-LaPadula to capture this</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>访问限制随着时间的推移而改变</p>
+<ul>
+<li>
+<p>最初，C-W中的主体可以阅读任何客体</p>
+</li>
+<li>
+<p>Bell-LaPadula限制了主体可以访问的客体集</p>
+<ul>
+<li>Can’t clear all subjects for all categories, because this violates CW-simple security condition</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 访问控制结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%9F%A9%E9%98%B5-ACM"><span class="toc-text">1.1 访问控制矩阵(ACM)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD"><span class="toc-text">1.2 访问控制功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E8%AE%BF%E9%97%AE%E8%83%BD%E5%8A%9B%E8%A1%A8"><span class="toc-text">1.3 访问能力表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E8%A1%A8-ACLs"><span class="toc-text">1.4 访问控制表(ACLs)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E8%81%9A%E5%90%88%E6%8A%80%E6%9C%AF"><span class="toc-text">1.5 聚合技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-%E7%BB%84%E5%92%8C%E8%B4%9F%E9%9D%A2%E6%9D%83%E9%99%90"><span class="toc-text">1.6 组和负面权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-%E5%9F%BA%E4%BA%8E%E8%A7%92%E8%89%B2%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6-RBAC"><span class="toc-text">1.7 基于角色的访问控制(RBAC)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8-Lattices"><span class="toc-text">1.8 Lattices</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 访问控制模型和策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E4%BF%9D%E5%AF%86%E6%94%BF%E7%AD%96"><span class="toc-text">2.1 保密政策</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Bell-LaPadula%E6%A8%A1%E5%9E%8B%EF%BC%8C%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-text">2.2 Bell-LaPadula模型，第一步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Bell-LaPadula%E6%A8%A1%E5%9E%8B%EF%BC%8C%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="toc-text">2.3 Bell-LaPadula模型，第二步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Biba%E5%AE%8C%E6%95%B4%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="toc-text">2.4 Biba完整性模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E4%B8%AD%E5%9B%BD%E5%A2%99%E6%A8%A1%E5%9E%8B"><span class="toc-text">2.5 中国墙模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-1-%E5%92%8CBell-LaPadula%E6%AF%94%E8%BE%83"><span class="toc-text">2.5.1 和Bell-LaPadula比较</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 陈泽豪</div><div class="footer_custom_text">我是豪豪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script></div></body></html>
