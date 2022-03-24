@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第2章 词法分析(scanner) | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 正则表达式运算及其构建方法   选择|   连结   重复或闭包*   L(正则表达式)&#x3D;{能匹配的所有串的集合}L(正则表达式)&#x3D;\{能匹配的所有串的集合\}L(正则表达式)&#x3D;{能匹配的所有串的集合}   正闭包+   字符范围表示运算符  [a-z] [0-9] a|b|c可写成[abc] 所有大小写字母[a-zA-Z]    可选?   任意.   不在给定集合~  非a、b、c表示为">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第 2 章 词法分析 (scanner) | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 正则表达式运算及其构建方法   选择 |   连结   重复或闭包 *   L(正则表达式 )&#x3D;{ 能匹配的所有串的集合 }L(正则表达式)&#x3D;\{能匹配的所有串的集合 \}L( 正则表达式 )&#x3D;{ 能匹配的所有串的集合}   正闭包 +   字符范围表示运算符  [a-z] [0-9] a|b|c 可写成[abc] 所有大小写字母[a-zA-Z]    可选?   任意.   不在给定集合~">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第2章 词法分析(scanner)">
+<meta property="og:title" content="第 2 章 词法分析 (scanner)">
 <meta property="og:url" content="https://chenzehao.com/35906.html">
 <meta property="og:site_name" content="陈泽豪">
-<meta property="og:description" content="1. 正则表达式运算及其构建方法   选择|   连结   重复或闭包*   L(正则表达式)&#x3D;{能匹配的所有串的集合}L(正则表达式)&#x3D;\{能匹配的所有串的集合\}L(正则表达式)&#x3D;{能匹配的所有串的集合}   正闭包+   字符范围表示运算符  [a-z] [0-9] a|b|c可写成[abc] 所有大小写字母[a-zA-Z]    可选?   任意.   不在给定集合~  非a、b、c表示为">
+<meta property="og:description" content="1. 正则表达式运算及其构建方法   选择 |   连结   重复或闭包 *   L(正则表达式 )&#x3D;{ 能匹配的所有串的集合 }L(正则表达式)&#x3D;\{能匹配的所有串的集合 \}L( 正则表达式 )&#x3D;{ 能匹配的所有串的集合}   正闭包 +   字符范围表示运算符  [a-z] [0-9] a|b|c 可写成[abc] 所有大小写字母[a-zA-Z]    可选?   任意.   不在给定集合~">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 <meta property="article:published_time" content="2022-01-08T16:00:00.000Z">
@@ -54,7 +54,7 @@
   islazyload: false,
   isAnchor: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '第2章 词法分析(scanner)',
+  title: '第 2 章 词法分析 (scanner)',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
@@ -167,29 +167,29 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第2章 词法分析(scanner)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-08T16:00:00.000Z" title="发表于 2022-01-09 00:00:00">2022-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:54:59.900Z" title="更新于 2022-01-21 13:54:59">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">406</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>1. 正则表达式运算及其构建方法</strong></p>
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第 2 章 词法分析 (scanner)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-08T16:00:00.000Z" title="发表于 2022-01-09 00:00:00">2022-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:54:59.900Z" title="更新于 2022-01-21 13:54:59">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">407</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>1. 正则表达式运算及其构建方法</strong></p>
 <ul>
 <li>
-<p>选择|</p>
+<p>选择 |</p>
 </li>
 <li>
 <p>连结</p>
 </li>
 <li>
-<p>重复或闭包*</p>
+<p>重复或闭包 *</p>
 </li>
 <li>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mtext>正则表达式</mtext><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">{</mo><mtext>能匹配的所有串的集合</mtext><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">L(正则表达式)=\{能匹配的所有串的集合\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mopen">(</span><span class="mord cjk_fallback">正则表达式</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord cjk_fallback">能匹配的所有串的集合</span><span class="mclose">}</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mtext>正则表达式 </mtext><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">{</mo><mtext> 能匹配的所有串的集合 </mtext><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">L(正则表达式)=\{能匹配的所有串的集合 \}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mopen">(</span><span class="mord cjk_fallback"> 正则表达式 </span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord cjk_fallback"> 能匹配的所有串的集合</span><span class="mclose">}</span></span></span></span></p>
 </li>
 <li>
-<p>正闭包+</p>
+<p>正闭包 +</p>
 </li>
 <li>
 <p>字符范围表示运算符</p>
 <ul>
 <li>[a-z]</li>
 <li>[0-9]</li>
-<li>a|b|c可写成[abc]</li>
+<li>a|b|c 可写成[abc]</li>
 <li>所有大小写字母[a-zA-Z]</li>
 </ul>
 </li>
@@ -202,18 +202,18 @@
 <li>
 <p>不在给定集合~</p>
 <ul>
-<li>非a、b、c表示为~(a|b|c)</li>
+<li>非 a、b、c 表示为~(a|b|c)</li>
 </ul>
 </li>
 <li>
 <p>二义性问题</p>
 <ul>
-<li>&lt;&gt;有两种理解：（小于号、大于号）和（不等于号）</li>
+<li>&lt;&gt; 有两种理解：（小于号、大于号）和（不等于号）</li>
 <li>解决方法：最长子串原理</li>
 </ul>
 </li>
 </ul>
-<p><strong>2. 正则表达式→NFA→DFA→DFA最小化</strong></p>
+<p><strong>2. 正则表达式→NFA→DFA→DFA 最小化</strong></p>
 <ul>
 <li>
 <p>DFA：确定性有穷自动机</p>
@@ -221,15 +221,15 @@
 <li>
 <p>NFA：非确定性有穷自动机</p>
 <ul>
-<li>允许<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span>转换</li>
+<li>允许 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span> 转换</li>
 <li>允许一对多的转换</li>
 </ul>
 </li>
 <li>
-<p>正则表达式→NFA：Thompson方法</p>
+<p>正则表达式→NFA：Thompson 方法</p>
 <ul>
-<li>为每个基本正则表达式画出一个NFA</li>
-<li>根据正则表达式的运算符号特点将各个NFA连结起来</li>
+<li>为每个基本正则表达式画出一个 NFA</li>
+<li>根据正则表达式的运算符号特点将各个 NFA 连结起来</li>
 </ul>
 </li>
 <li>
@@ -237,14 +237,14 @@
 <ul>
 <li>合并等价状态（子集构造法）
 <ul>
-<li>消除<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span>转换</li>
+<li>消除 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span> 转换</li>
 <li>消除多重转换</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p>DFA最小化</p>
+<p>DFA 最小化</p>
 <ul>
 <li>划分终态和非终态集合</li>
 </ul>
@@ -252,16 +252,16 @@
 </ul>
 <p><strong>3. 词法分析程序的生成方法</strong></p>
 <ul>
-<li>方法1
+<li>方法 1
 <ul>
-<li>用一个变量保持当前的状态，并将转换写成一个双层嵌套的case语句而不是一个循环</li>
-<li>其中第1个case语句测试当前的状态，嵌套着的第2层测试输入字符及所给状态</li>
+<li>用一个变量保持当前的状态，并将转换写成一个双层嵌套的 case 语句而不是一个循环</li>
+<li>其中第 1 个 case 语句测试当前的状态，嵌套着的第 2 层测试输入字符及所给状态</li>
 </ul>
 </li>
-<li>方法2
+<li>方法 2
 <ul>
 <li>转换表——二维数组</li>
-<li>通过表示转换函数T值的状态和输入字符来索引</li>
+<li>通过表示转换函数 T 值的状态和输入字符来索引</li>
 </ul>
 </li>
 </ul>

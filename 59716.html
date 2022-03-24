@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第1章 | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 程序语言的分类  机器语言 汇编语言 高级语言  2. 程序翻译的方式有哪几种？有何不同？  编译  先翻译为目标代码程序，后执行目标代码程序      解释  解释一句执行一句 边解释边执行     3. 编译程序包含有多少个阶段，各阶段的功能任务分别是什么？  扫描程序  源程序的字符→记号（token）   语法分析程序  语法分析定义了程序的记号元素及其关系 记号→句子→用分析树或语">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第 1 章 | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 程序语言的分类    机器语言   汇编语言   高级语言   2. 程序翻译的方式有哪几种？有何不同？   编译   先翻译为目标代码程序，后执行目标代码程序        解释   解释一句执行一句   边解释边执行      3. 编译程序包含有多少个阶段，各阶段的功能任务分别是什么？   扫描程序   源程序的字符→记号（token）    语法分析程序   语法分析定义了程序的记号">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第1章">
+<meta property="og:title" content="第 1 章">
 <meta property="og:url" content="https://chenzehao.com/59716.html">
 <meta property="og:site_name" content="陈泽豪">
-<meta property="og:description" content="1. 程序语言的分类  机器语言 汇编语言 高级语言  2. 程序翻译的方式有哪几种？有何不同？  编译  先翻译为目标代码程序，后执行目标代码程序      解释  解释一句执行一句 边解释边执行     3. 编译程序包含有多少个阶段，各阶段的功能任务分别是什么？  扫描程序  源程序的字符→记号（token）   语法分析程序  语法分析定义了程序的记号元素及其关系 记号→句子→用分析树或语">
+<meta property="og:description" content="1. 程序语言的分类    机器语言   汇编语言   高级语言   2. 程序翻译的方式有哪几种？有何不同？   编译   先翻译为目标代码程序，后执行目标代码程序        解释   解释一句执行一句   边解释边执行      3. 编译程序包含有多少个阶段，各阶段的功能任务分别是什么？   扫描程序   源程序的字符→记号（token）    语法分析程序   语法分析定义了程序的记号">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 <meta property="article:published_time" content="2022-01-08T16:00:00.000Z">
@@ -54,7 +54,7 @@
   islazyload: false,
   isAnchor: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '第1章',
+  title: '第 1 章',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
@@ -167,67 +167,67 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第1章</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-08T16:00:00.000Z" title="发表于 2022-01-09 00:00:00">2022-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:55:01.850Z" title="更新于 2022-01-21 13:55:01">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">283</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>1. 程序语言的分类</strong></p>
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第 1 章</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-08T16:00:00.000Z" title="发表于 2022-01-09 00:00:00">2022-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:55:01.850Z" title="更新于 2022-01-21 13:55:01">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">283</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>1. 程序语言的分类 </strong></p>
 <ul>
-<li>机器语言</li>
-<li>汇编语言</li>
-<li>高级语言</li>
+<li> 机器语言 </li>
+<li> 汇编语言 </li>
+<li> 高级语言 </li>
 </ul>
 <p><strong>2. 程序翻译的方式有哪几种？有何不同？</strong></p>
 <ul>
-<li>编译
+<li> 编译
 <ul>
-<li>先翻译为目标代码程序，后执行目标代码程序</li>
+<li> 先翻译为目标代码程序，后执行目标代码程序 </li>
 </ul>
 </li>
 </ul>
 <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy7as02kxfj30pk0lugmx.jpg" alt="image-20220109121548547" style="zoom: 33%;" />
 <ul>
-<li>解释
+<li> 解释
 <ul>
-<li>解释一句执行一句</li>
-<li>边解释边执行</li>
+<li> 解释一句执行一句 </li>
+<li> 边解释边执行 </li>
 </ul>
 </li>
 </ul>
 <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy7ashagtpj30k20jamxy.jpg" alt="image-20220109121616625" style="zoom:33%;" />
 <p><strong>3. 编译程序包含有多少个阶段，各阶段的功能任务分别是什么？</strong></p>
 <ul>
-<li>扫描程序
+<li> 扫描程序
 <ul>
-<li>源程序的字符→记号（token）</li>
+<li> 源程序的字符→记号（token）</li>
 </ul>
 </li>
-<li>语法分析程序
+<li> 语法分析程序
 <ul>
-<li>语法分析定义了程序的记号元素及其关系</li>
-<li>记号→句子→用分析树或语法树表示</li>
+<li> 语法分析定义了程序的记号元素及其关系 </li>
+<li> 记号→句子→用分析树或语法树表示 </li>
 </ul>
 </li>
-<li>语义分析程序
+<li> 语义分析程序
 <ul>
-<li>程序的语义→理解其“意思”</li>
-<li>一般的程序设计语言的典型静态语义包括声明和类型检查</li>
+<li> 程序的语义→理解其“意思”</li>
+<li> 一般的程序设计语言的典型静态语义包括声明和类型检查 </li>
 </ul>
 </li>
-<li>源代码优化程序
+<li> 源代码优化程序
 <ul>
-<li>对代码进行改进或优化步骤
+<li> 对代码进行改进或优化步骤
 <ul>
-<li>与机器无关的优化</li>
+<li> 与机器无关的优化 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>代码生成器
+<li> 代码生成器
 <ul>
-<li>得到中间代码(IR)，并生成目标机器代码</li>
+<li> 得到中间代码 (IR)，并生成目标机器代码 </li>
 </ul>
 </li>
-<li>目标代码优化程序
+<li> 目标代码优化程序
 <ul>
-<li>与机器有关的优化，利用机器指令特征进行优化</li>
-<li>优化的目的：运行效率和节省内存空间</li>
+<li> 与机器有关的优化，利用机器指令特征进行优化 </li>
+<li> 优化的目的：运行效率和节省内存空间 </li>
 </ul>
 </li>
 </ul>

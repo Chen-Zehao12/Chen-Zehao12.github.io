@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第4章 自顶向下的分析 | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="重点  1. 自顶向下分析法的问题：左公共因子、左递归  回溯分析程序  对于同一非终结符的多条规则，右部First集合交集不为空，会引起回溯 左递归也会引起回溯——死递归   预测性(无回溯)的自顶向下分析方法  递归下降分析法 LL(1)分析法    2. 递归下降语法分析方法（或称递归子程序）  根据语法图的处理逻辑进行描述 每个非终结符都对应一个函数 改为EBNF能更好写出递归子程序 添">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第 4 章 自顶向下的分析 | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="重点  1. 自顶向下分析法的问题：左公共因子、左递归  回溯分析程序  对于同一非终结符的多条规则，右部 First 集合交集不为空，会引起回溯 左递归也会引起回溯——死递归   预测性 (无回溯) 的自顶向下分析方法  递归下降分析法 LL(1)分析法    2. 递归下降语法分析方法（或称递归子程序）  根据语法图的处理逻辑进行描述 每个非终结符都对应一个函数 改为 EBNF 能更好写出递">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第4章 自顶向下的分析">
+<meta property="og:title" content="第 4 章 自顶向下的分析">
 <meta property="og:url" content="https://chenzehao.com/18605.html">
 <meta property="og:site_name" content="陈泽豪">
-<meta property="og:description" content="重点  1. 自顶向下分析法的问题：左公共因子、左递归  回溯分析程序  对于同一非终结符的多条规则，右部First集合交集不为空，会引起回溯 左递归也会引起回溯——死递归   预测性(无回溯)的自顶向下分析方法  递归下降分析法 LL(1)分析法    2. 递归下降语法分析方法（或称递归子程序）  根据语法图的处理逻辑进行描述 每个非终结符都对应一个函数 改为EBNF能更好写出递归子程序 添">
+<meta property="og:description" content="重点  1. 自顶向下分析法的问题：左公共因子、左递归  回溯分析程序  对于同一非终结符的多条规则，右部 First 集合交集不为空，会引起回溯 左递归也会引起回溯——死递归   预测性 (无回溯) 的自顶向下分析方法  递归下降分析法 LL(1)分析法    2. 递归下降语法分析方法（或称递归子程序）  根据语法图的处理逻辑进行描述 每个非终结符都对应一个函数 改为 EBNF 能更好写出递">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 <meta property="article:published_time" content="2022-01-08T16:00:00.000Z">
@@ -54,7 +54,7 @@
   islazyload: false,
   isAnchor: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '第4章 自顶向下的分析',
+  title: '第 4 章 自顶向下的分析',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
@@ -167,18 +167,18 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第4章 自顶向下的分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-08T16:00:00.000Z" title="发表于 2022-01-09 00:00:00">2022-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:54:56.280Z" title="更新于 2022-01-21 13:54:56">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">365</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><ul>
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第 4 章 自顶向下的分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-08T16:00:00.000Z" title="发表于 2022-01-09 00:00:00">2022-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:54:56.280Z" title="更新于 2022-01-21 13:54:56">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">369</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><ul>
 <li>重点</li>
 </ul>
 <p><strong>1. 自顶向下分析法的问题：左公共因子、左递归</strong></p>
 <ul>
 <li>回溯分析程序
 <ul>
-<li>对于同一非终结符的多条规则，右部First集合交集不为空，会引起回溯</li>
+<li>对于同一非终结符的多条规则，右部 First 集合交集不为空，会引起回溯</li>
 <li>左递归也会引起回溯——死递归</li>
 </ul>
 </li>
-<li>预测性(无回溯)的自顶向下分析方法
+<li>预测性 (无回溯) 的自顶向下分析方法
 <ul>
 <li>递归下降分析法</li>
 <li>LL(1)分析法</li>
@@ -189,23 +189,23 @@
 <ul>
 <li>根据语法图的处理逻辑进行描述</li>
 <li>每个非终结符都对应一个函数</li>
-<li>改为EBNF能更好写出递归子程序</li>
+<li>改为 EBNF 能更好写出递归子程序</li>
 <li>添加计算功能，语法树生成功能</li>
 <li>总结
 <ul>
 <li>功能非常强大，比较适合于手工方法</li>
 <li>分析效率低，仅适合于小型语言语法分析程序的构造</li>
-<li>为了解决一些问题，通常先将BNF文法规则改写为EBNF规则</li>
+<li>为了解决一些问题，通常先将 BNF 文法规则改写为 EBNF 规则</li>
 <li>在生成语法树时，要注意二义性问题的分析</li>
 </ul>
 </li>
 </ul>
-<p><strong>3. LL(1)分析方法（LL(1)分析表及LL(1)分析过程）</strong></p>
+<p><strong>3. LL(1)分析方法（LL(1)分析表及 LL(1)分析过程）</strong></p>
 <ul>
-<li>第1个L：从左往右进行读入</li>
-<li>第2个L：利用最左推导进行分析</li>
-<li>数字1：向前查看1个符号就能预测分析</li>
-<li>LL(k)：利用向前查看k个符号来进行预测分析</li>
+<li>第 1 个 L：从左往右进行读入</li>
+<li>第 2 个 L：利用最左推导进行分析</li>
+<li>数字 1：向前查看 1 个符号就能预测分析</li>
+<li>LL(k)：利用向前查看 k 个符号来进行预测分析</li>
 </ul>
 <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy8sjewxlhj31fg0pwq8a.jpg" alt="image-20220110191548748" style="zoom:50%;" />
 <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gy8sl4hnhlj314n0u0jx6.jpg" alt="image-20220110191730629" style="zoom:50%;" />
@@ -217,7 +217,7 @@
 <li>LL(1)分析表：M[N, T]</li>
 <li>二义性消除的新方法</li>
 </ul>
-<p><strong>4. First与Follow集合</strong></p>
+<p><strong>4. First 与 Follow 集合</strong></p>
 <ul>
 <li>看第三章</li>
 </ul>

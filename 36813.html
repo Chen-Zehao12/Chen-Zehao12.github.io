@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第3章 语言和文法的形式定义 | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 文法、语言？  语言的有穷表示  生成方式（文法）  语言中的每个句子可以用严格定义的规则来构造   识别方式（自动机）    2. 文法的分类是怎样的？它们之间有何关系？  文法  四个基本要素  终结符集合VTV_TVT​ 非终结符集合VNV_NVN​ 开始符号SSS 规则或产生式的集合PPP   注意  规则右部的运算符是选择、并置、括号 没有重复运算符，用递归实现重复 右部可以使用ϵ">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第 3 章 语言和文法的形式定义 | 陈泽豪</title><meta name="author" content="陈泽豪"><meta name="copyright" content="陈泽豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 文法、语言？  语言的有穷表示  生成方式（文法）  语言中的每个句子可以用  严格定义的规则  来构造   识别方式（自动机）    2. 文法的分类是怎样的？它们之间有何关系？  文法  四个基本要素  终结符集合VTV_TVT​ 非终结符集合VNV_NVN​ 开始符号SSS 规则或产生式的集合PPP   注意  规则右部的运算符是选择、并置、括号 没有重复运算符，用递归实现重复 右部可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第3章 语言和文法的形式定义">
+<meta property="og:title" content="第 3 章 语言和文法的形式定义">
 <meta property="og:url" content="https://chenzehao.com/36813.html">
 <meta property="og:site_name" content="陈泽豪">
-<meta property="og:description" content="1. 文法、语言？  语言的有穷表示  生成方式（文法）  语言中的每个句子可以用严格定义的规则来构造   识别方式（自动机）    2. 文法的分类是怎样的？它们之间有何关系？  文法  四个基本要素  终结符集合VTV_TVT​ 非终结符集合VNV_NVN​ 开始符号SSS 规则或产生式的集合PPP   注意  规则右部的运算符是选择、并置、括号 没有重复运算符，用递归实现重复 右部可以使用ϵ">
+<meta property="og:description" content="1. 文法、语言？  语言的有穷表示  生成方式（文法）  语言中的每个句子可以用  严格定义的规则  来构造   识别方式（自动机）    2. 文法的分类是怎样的？它们之间有何关系？  文法  四个基本要素  终结符集合VTV_TVT​ 非终结符集合VNV_NVN​ 开始符号SSS 规则或产生式的集合PPP   注意  规则右部的运算符是选择、并置、括号 没有重复运算符，用递归实现重复 右部可">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 <meta property="article:published_time" content="2022-01-08T16:00:00.000Z">
@@ -54,7 +54,7 @@
   islazyload: false,
   isAnchor: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '第3章 语言和文法的形式定义',
+  title: '第 3 章 语言和文法的形式定义',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
@@ -167,13 +167,13 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第3章 语言和文法的形式定义</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-08T16:00:00.000Z" title="发表于 2022-01-09 00:00:00">2022-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:54:58.160Z" title="更新于 2022-01-21 13:54:58">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">859</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>1. 文法、语言？</strong></p>
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">23</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第 3 章 语言和文法的形式定义</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-08T16:00:00.000Z" title="发表于 2022-01-09 00:00:00">2022-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-21T05:54:58.160Z" title="更新于 2022-01-21 13:54:58">2022-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">864</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>1. 文法、语言？</strong></p>
 <ul>
 <li>语言的有穷表示
 <ul>
 <li>生成方式（文法）
 <ul>
-<li>语言中的每个句子可以用<strong>严格定义的规则</strong>来构造</li>
+<li>语言中的每个句子可以用 <strong> 严格定义的规则 </strong> 来构造</li>
 </ul>
 </li>
 <li>识别方式（自动机）</li>
@@ -201,32 +201,32 @@
 </li>
 </ul>
 </li>
-<li>通过对<strong>产生式</strong>施加不同的限制，把文法及其对应的语言分成四种类型，即<strong>0型、1型、2型和3型</strong></li>
-<li>0型文法
+<li>通过对 <strong> 产生式 </strong> 施加不同的限制，把文法及其对应的语言分成四种类型，即<strong>0 型、1 型、2 型和 3 型</strong></li>
+<li>0 型文法
 <ul>
 <li>规则左侧至少包含一个非终结符</li>
-<li>能够用0型文法定义的语言称为0型语言或递归可枚举语言</li>
+<li>能够用 0 型文法定义的语言称为 0 型语言或递归可枚举语言</li>
 </ul>
 </li>
-<li>1型文法
+<li>1 型文法
 <ul>
-<li>左侧的长度≤右侧的长度，仅<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>→</mo><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">S→\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span>除外</li>
-<li>要求<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span>不得出现在任何产生式的右部</li>
+<li>左侧的长度≤右侧的长度，仅 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>→</mo><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">S→\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span> 除外</li>
+<li>要求 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span> 不得出现在任何产生式的右部</li>
 <li>也称为上下文有关文法</li>
-<li>能够用1型文法定义的语言称为1型语言或上下文有关语言</li>
+<li>能够用 1 型文法定义的语言称为 1 型语言或上下文有关语言</li>
 </ul>
 </li>
-<li>2型文法
+<li>2 型文法
 <ul>
 <li>左侧都是非终结符号</li>
-<li>能够用2型文法定义的语言称为2型语言或上下文无关语言</li>
+<li>能够用 2 型文法定义的语言称为 2 型语言或上下文无关语言</li>
 </ul>
 </li>
-<li>3型文法
+<li>3 型文法
 <ul>
 <li>右线性规则或左线性规则</li>
-<li>能够用3型文法定义的语言称为3型语言或正规语言</li>
-<li>3型文法也称为正则文法（或正则文法）</li>
+<li>能够用 3 型文法定义的语言称为 3 型语言或正规语言</li>
+<li>3 型文法也称为正则文法（或正则文法）</li>
 </ul>
 </li>
 </ul>
@@ -241,10 +241,10 @@
 <p>规约：从右到左</p>
 </li>
 <li>
-<p>规范推导=最右推导</p>
+<p>规范推导 = 最右推导</p>
 </li>
 <li>
-<p>规范规约=最左规约</p>
+<p>规范规约 = 最左规约</p>
 <ul>
 <li>凡是句子，必定存在规范规约</li>
 </ul>
@@ -262,7 +262,7 @@
 </ul>
 </li>
 <li>
-<p>一个CFG是否为二义的问题是不可判定的，即不存在解决该问题的算法</p>
+<p>一个 CFG 是否为二义的问题是不可判定的，即不存在解决该问题的算法</p>
 </li>
 <li>
 <p>消除二义性</p>
@@ -273,28 +273,28 @@
 </ul>
 <p><strong>4. 如何画语法树？</strong></p>
 <ul>
-<li>实验4</li>
+<li>实验 4</li>
 </ul>
 <p><strong>5. 文法二义性的消除方法有多少种？</strong></p>
 <ul>
 <li>
-<p>第三章3个方法</p>
+<p>第三章 3 个方法</p>
 <ul>
 <li>补充文字说明</li>
 <li>文法规则改造</li>
-<li>修改语句书写格式（例如endif）</li>
+<li>修改语句书写格式（例如 endif）</li>
 </ul>
 </li>
 <li>
 <p>第四章</p>
 <ul>
-<li>LL(1)的时候会出现二义性：求follow集合</li>
+<li>LL(1)的时候会出现二义性：求 follow 集合</li>
 </ul>
 </li>
 <li>
 <p>第五章</p>
 <ul>
-<li>SLR(1)的时候会出现二义性：出现规约-移进冲突
+<li>SLR(1)的时候会出现二义性：出现规约 - 移进冲突
 <ul>
 <li>最长串匹配原则——只移进不规约</li>
 </ul>
@@ -316,12 +316,12 @@
 </li>
 <li>消除回溯性
 <ul>
-<li>求first集合</li>
+<li>求 first 集合</li>
 </ul>
 </li>
 <li>直接左递归
 <ul>
-<li>用EBNF</li>
+<li>用 EBNF</li>
 <li>改写为右递归</li>
 </ul>
 </li>
