@@ -57,7 +57,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2022-04-06 23:30:22'
+  postUpdate: '2022-04-17 00:08:00'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -165,7 +165,17 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">88</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">27</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://tva1.sinaimg.cn/large/008i3skNgy1gyk8gstf4tj31400u0411.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">陈泽豪</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/Chen-Zehao12" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:366456863@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/64711.html" title="4- 锁">4- 锁</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-16T16:00:00.000Z" title="发表于 2021-06-17 00:00:00">2021-06-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="content">在上一章中，提及事务之间的相互影响时，介绍了脏读、幻读等几种类型的数据错误，为更好避免发生这些错误，引入了对资源的锁定。锁定的存在使得一个事务对他自己的数据块进行操作时，另外一个事务不能插足这个数据块。
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">28</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://tva1.sinaimg.cn/large/008i3skNgy1gyk8gstf4tj31400u0411.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">陈泽豪</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span> 笔记</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">陈泽豪</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/Chen-Zehao12" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:366456863@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/4361.html" title="5- 常用 SQL 语句">5- 常用 SQL 语句</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-17T16:00:00.000Z" title="发表于 2021-06-18 00:00:00">2021-06-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="content">1. SQL 语句主要分为哪些类别
+SQL 语句可分为以下几类：
+
+数据定义语言 DDL（Data Ddefinition Language）：例如 CREATE，DROP，ALTER 等，对逻辑结构等有操作的，其中包括表结构，视图和索引。
+数据查询语言 DQL（Data Query Language）：即查询操作，以 SELECT 关键字为主，各种简单查询、连接查询等都属于 DQL。
+数据操纵语言 DML（Data Manipulation Language）：例如 INSERT，UPDATE，DELETE 等，对数据进行操作的。DQL 与 DML 共同构建了多数初级程序员常用的 增删改查 操作，而查询是较为特殊的一种，被划分到 DQL 中。
+数据控制功能 DCL（Data Control Language）：例如 GRANT，REVOKE，COMMIT，ROLLBACK 等，对数据库安全性、完整性等有操作的，可以简单的理解为权限控制等。
+
+2. 什么是超键？什么是主键？
+
+超键：在关系中，能唯一标识元组的属性集称为关系模式的超键。一个属性可以作为一个超键，多个属性组合在一起也可以作 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/64711.html" title="4- 锁">4- 锁</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-16T16:00:00.000Z" title="发表于 2021-06-17 00:00:00">2021-06-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="content">在上一章中，提及事务之间的相互影响时，介绍了脏读、幻读等几种类型的数据错误，为更好避免发生这些错误，引入了对资源的锁定。锁定的存在使得一个事务对他自己的数据块进行操作时，另外一个事务不能插足这个数据块。
 1. 锁的分类
 从数据库系统的角度，锁模式可分为以下 6 种类型：
 
@@ -304,55 +314,7 @@ path：指定一个路径列表，用于搜索可执行文件的。
 Java 语言是区别大小写语言，Myfirst 与 myfirst 分别代表不同的标识符。
 
 
-标识符不能与关键字（保留字）同名。 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/50455.html" title="0- 引论">0- 引论</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-12-18T16:00:00.000Z" title="发表于 2020-12-19 00:00:00">2020-12-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python-%E5%9F%BA%E7%A1%80/">Python-基础</a></span></div><div class="content">1. 人工智能编程语言 
-10 种人工智能 Artificial Intelligence (AI) 和机器学习 Machine Learning (ML) 编程语言 
-
-
-Python
-
-
-R-language
-（1）开源，免费开发。
-
-
-** 开源：** 可以修改源代码 
-
-
-** 免费开发：** 免费提供给用户使用 
-
-
-
- 二者不同 
-
-（2）解释型和动态类型的编程语言 
-
-** 解释型：** 类似同声传译 
-
-（3）用于统计分析和控制数据 
-（4）多种操作系统运行 
-
-
-Java
-
-
-Lisp（List Processing）
-（1）最古老的 AI 编程语言，主要为列表 
-（2）第一个函数式程序语言 
-
-** 函数式：** 关系的是映射关系 
-
-（3）是解释型和动态类型的编程语言 
-（4）有效地处理符号信息 
-
-
-JavaScript
-（1）一种开源的轻量级的高级 web 应用程序客户端编程语言 
-（2）是解释型和动态类型的编程语言 
-（3）数据科学和机器学习（Tensorflow.js）
-
-
-Prolog（Programming in Logic）
-（1）解释型 or 编译 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#content-inner">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">陈泽豪</div><div class="author-info__description">少冰 七分糖 珍波椰🧋</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">88</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">27</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Chen-Zehao12" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:366456863@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这是豪豪的个人博客哦~</div></div><div class="sticky_layout"><div class="card-widget card-categories"><div class="item-headline">
+标识符不能与关键字（保留字）同名。 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#content-inner">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gyk8f9yfnqj305k05kglg.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">陈泽豪</div><div class="author-info__description">少冰 七分糖 珍波椰🧋</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">89</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">28</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Chen-Zehao12" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:366456863@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这是豪豪的个人博客哦~</div></div><div class="sticky_layout"><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             <a class="card-more-btn" href="/categories/" title="查看更多">
@@ -360,7 +322,7 @@ Prolog（Programming in Logic）
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C-STL%E5%BA%93/"><span class="card-category-list-name">C++-STL库</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Django/"><span class="card-category-list-name">Django</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java-%E5%9F%BA%E7%A1%80/"><span class="card-category-list-name">Java-基础</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python-%E5%9F%BA%E7%A1%80/"><span class="card-category-list-name">Python-基础</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="card-category-list-name">Python-数据库</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SSR%E6%9C%BA%E5%9C%BA/"><span class="card-category-list-name">SSR机场</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">1</span></a></li>
-            </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">88</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2021-07-31T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">213.8k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-04-06T15:30:22.002Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 陈泽豪</div><div class="footer_custom_text">我是豪豪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>var preloader = {
+            </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">89</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2021-07-31T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">213.9k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-04-16T16:08:00.391Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 陈泽豪</div><div class="footer_custom_text">我是豪豪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>var preloader = {
   endLoading: () => {
     document.body.style.overflow = 'auto';
     document.getElementById('loading-box').classList.add("loaded")
