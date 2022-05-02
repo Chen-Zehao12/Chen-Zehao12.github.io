@@ -57,7 +57,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2022-05-03 01:12:03'
+  postUpdate: '2022-05-03 01:15:06'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -196,18 +196,7 @@ TensorFlow 将这个数据集和相关操作封装到了库中。
 （2）使用自己的数据。
  下面将针对模型训练的各个主要环节进行介绍，便于读者快速迁移去训练自己的数据模型。
 1. 准备数据 
- 准备数据是训练模型的第一步，基础数据可以是网上公开的数据集，也可以是自己的数据集。视觉、语音、语言等各种类型的数据在网上都能找到相应的数据集。 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/15018.html" title="Tensorflow 入门 (六)——CNN 经典模型：LeNet">Tensorflow 入门 (六)——CNN 经典模型：LeNet</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-13T16:00:00.000Z" title="发表于 2020-08-14 00:00:00">2020-08-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"> 原文链接：https://my.oschina.net/u/876354/blog/1632862
- 本文在原文基础上进行细微的修改和完善。
-
- 近几年来，卷积神经网络（Convolutional Neural Networks，简称 CNN）在图像识别中取得了非常成功的应用，成为深度学习的一大亮点。CNN 发展至今，已经有很多变种，其中有几个经典模型在 CNN 发展历程中有着里程碑的意义，它们分别是：LeNet、Alexnet、Googlenet、VGG、DRL 等。
- 本文将介绍 CNN 经典模型之 LeNet
- 在此简单回顾一下 CNN 的几个特点： 局部感知、参数共享、池化 。
-1. CNN 的三个特点 
-1.1 局部感知 
- 人类对外界的认知一般是从局部到全局、从片面到全面，类似的，在机器识别图像时也没有必要把整张图像按像素全部都连接到神经网络中，在图像中也是局部周边的像素联系比较紧密，而距离较远的像素则相关性较弱，因此可以采用局部连接的模式（将图像分块连接，这样能大大减少模型的参数），如下图所示：
-
-1.2 参数（权值）共享 
- 每张自然图像（人物、山水、建筑等）都有其固 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/49759.html" title="Tensorflow 入门 (五)——初识卷积神经网络（CNN）">Tensorflow 入门 (五)——初识卷积神经网络（CNN）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-13T16:00:00.000Z" title="发表于 2020-08-14 00:00:00">2020-08-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"> 原文链接：https://my.oschina.net/u/876354/blog/1620906
+ 准备数据是训练模型的第一步，基础数据可以是网上公开的数据集，也可以是自己的数据集。视觉、语音、语言等各种类型的数据在网上都能找到相应的数据集。 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/49759.html" title="Tensorflow 入门 (五)——初识卷积神经网络（CNN）">Tensorflow 入门 (五)——初识卷积神经网络（CNN）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-13T16:00:00.000Z" title="发表于 2020-08-14 00:00:00">2020-08-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"> 原文链接：https://my.oschina.net/u/876354/blog/1620906
  本文在原文基础上进行细微的修改和完善。
 1. 什么是神经网络？
  这里的神经网络，也指人工神经网络（Artificial Neural Networks，简称 ANNs），是一种模仿生物神经网络行为特征的算法数学模型，由神经元、节点与节点之间的连接（突触）所构成，如下图：
@@ -218,7 +207,18 @@ TensorFlow 将这个数据集和相关操作封装到了库中。
 
  人工神经网络可以映射任意复杂的非线性关系，具有很强的鲁棒性、记忆能力、自学习等能力，在分类、预测、模式识别等方面有着广泛的应用。
 2. 什么是卷积神经网络？
- 卷积神经网络在图像识别中大放异彩，达到了前所未有的准确 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/26948.html" title="第九届蓝桥杯大赛个人赛省赛（软件类）">第九届蓝桥杯大赛个人赛省赛（软件类）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-11T16:00:00.000Z" title="发表于 2020-08-12 00:00:00">2020-08-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a></span></div><div class="content">
+ 卷积神经网络在图像识别中大放异彩，达到了前所未有的准确 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/15018.html" title="Tensorflow 入门 (六)——CNN 经典模型：LeNet">Tensorflow 入门 (六)——CNN 经典模型：LeNet</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-13T16:00:00.000Z" title="发表于 2020-08-14 00:00:00">2020-08-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"> 原文链接：https://my.oschina.net/u/876354/blog/1632862
+ 本文在原文基础上进行细微的修改和完善。
+
+ 近几年来，卷积神经网络（Convolutional Neural Networks，简称 CNN）在图像识别中取得了非常成功的应用，成为深度学习的一大亮点。CNN 发展至今，已经有很多变种，其中有几个经典模型在 CNN 发展历程中有着里程碑的意义，它们分别是：LeNet、Alexnet、Googlenet、VGG、DRL 等。
+ 本文将介绍 CNN 经典模型之 LeNet
+ 在此简单回顾一下 CNN 的几个特点： 局部感知、参数共享、池化 。
+1. CNN 的三个特点 
+1.1 局部感知 
+ 人类对外界的认知一般是从局部到全局、从片面到全面，类似的，在机器识别图像时也没有必要把整张图像按像素全部都连接到神经网络中，在图像中也是局部周边的像素联系比较紧密，而距离较远的像素则相关性较弱，因此可以采用局部连接的模式（将图像分块连接，这样能大大减少模型的参数），如下图所示：
+
+1.2 参数（权值）共享 
+ 每张自然图像（人物、山水、建筑等）都有其固 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/26948.html" title="第九届蓝桥杯大赛个人赛省赛（软件类）">第九届蓝桥杯大赛个人赛省赛（软件类）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-11T16:00:00.000Z" title="发表于 2020-08-12 00:00:00">2020-08-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a></span></div><div class="content">
 
 
  题目 
@@ -308,16 +308,7 @@ S20=a1(1−q20)1−q=1−(12)2 ...</div></div></div><div class="recent-post-item
 2.1 回归模型的损失函数 
  首先讲解回归模型的损失函数，回归模型是预测连续因变量的。
  为方便介绍，先定义预测结果（-1 至 1 的等差序列）、目标结果（目标值为 0），代码如下：
-1234567import tensorflow as tfsess = tf.Session()y_pred = tf.linspace(-1., 1., 100 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2433.html" title="Tensorflow 入门 (一)">Tensorflow 入门 (一)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-09T16:00:00.000Z" title="发表于 2020-08-10 00:00:00">2020-08-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"> 原文链接：https://my.oschina.net/u/876354/blog/1930175
- 本文在原文基础上进行细微的修改和完善。
-1. Hello World
- 程序员从“Hello World”开始。在安装好 Tensorflow 之后，写个 Hello World 试试安装是否成功。代码如下：
-1234import tensorflow as tfhello = tf.constant(&#x27;Hello, Tensorflow!&#x27;)sess = tf.Session()print(sess.run(hello))
- 运行后，在许多警告之后，若成功输出 b’Hello, Tensorflow!'，则表明 Tensorflow 安装成功。
- 从这个 Hello World 代码可以看出：
-
- 要使用 tensorflow，先要导入 tensorflow 库，使用 import tensorflow 导入，一般会简写为 tf
- 要执行 tensorflow，先要创建 Session（会话）。Session 是用户使用 tensorflow 时的交互接口，用以 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/32710.html" title="Tensorflow 入门 (三)——激活函数">Tensorflow 入门 (三)——激活函数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-09T16:00:00.000Z" title="发表于 2020-08-10 00:00:00">2020-08-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"> 原文链接：https://my.oschina.net/u/876354/blog/1937296
+1234567import tensorflow as tfsess = tf.Session()y_pred = tf.linspace(-1., 1., 100 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/32710.html" title="Tensorflow 入门 (三)——激活函数">Tensorflow 入门 (三)——激活函数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-09T16:00:00.000Z" title="发表于 2020-08-10 00:00:00">2020-08-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"> 原文链接：https://my.oschina.net/u/876354/blog/1937296
  本文在原文基础上进行细微的修改和完善。
 1. 什么是激活函数 
  激活函数是所有神经网络算法的必备神器，通过加入激活函数可实现张量计算的非线性化，从而提升神经网络模型的泛化能力。
@@ -334,7 +325,16 @@ S20=a1(1−q20)1−q=1−(12)2 ...</div></div></div><div class="recent-post-item
 
 
  创建一个会话，调用默认计算图 
-12import tensor ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/7333.html" title="Tensorflow 入门 (二)——计算图、会话">Tensorflow 入门 (二)——计算图、会话</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-09T16:00:00.000Z" title="发表于 2020-08-10 00:00:00">2020-08-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"> 原文链接：https://my.oschina.net/u/876354/blog/1930490
+12import tensor ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2433.html" title="Tensorflow 入门 (一)">Tensorflow 入门 (一)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-09T16:00:00.000Z" title="发表于 2020-08-10 00:00:00">2020-08-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"> 原文链接：https://my.oschina.net/u/876354/blog/1930175
+ 本文在原文基础上进行细微的修改和完善。
+1. Hello World
+ 程序员从“Hello World”开始。在安装好 Tensorflow 之后，写个 Hello World 试试安装是否成功。代码如下：
+1234import tensorflow as tfhello = tf.constant(&#x27;Hello, Tensorflow!&#x27;)sess = tf.Session()print(sess.run(hello))
+ 运行后，在许多警告之后，若成功输出 b’Hello, Tensorflow!'，则表明 Tensorflow 安装成功。
+ 从这个 Hello World 代码可以看出：
+
+ 要使用 tensorflow，先要导入 tensorflow 库，使用 import tensorflow 导入，一般会简写为 tf
+ 要执行 tensorflow，先要创建 Session（会话）。Session 是用户使用 tensorflow 时的交互接口，用以 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/7333.html" title="Tensorflow 入门 (二)——计算图、会话">Tensorflow 入门 (二)——计算图、会话</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-09T16:00:00.000Z" title="发表于 2020-08-10 00:00:00">2020-08-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"> 原文链接：https://my.oschina.net/u/876354/blog/1930490
  本文在原文基础上进行细微的修改和完善。
 
  计算图是 TensorFlow 的核心概念，使用图（Graph）来表示计算任务，由节点和边组成。TensorFlow 由前端负责构建计算图，后端负责执行计算图。
@@ -353,7 +353,7 @@ TensorFlow Python 库已经有一个默认图 (default graph)，如果没有创�
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C-STL%E5%BA%93/"><span class="card-category-list-name">C++-STL库</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Django/"><span class="card-category-list-name">Django</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java-%E5%9F%BA%E7%A1%80/"><span class="card-category-list-name">Java-基础</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python-%E5%9F%BA%E7%A1%80/"><span class="card-category-list-name">Python-基础</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="card-category-list-name">Python-数据库</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SSR%E6%9C%BA%E5%9C%BA/"><span class="card-category-list-name">SSR机场</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">1</span></a></li>
-            </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">93</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2021-07-31T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">218.9k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-05-02T17:12:03.311Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 陈泽豪</div><div class="footer_custom_text">我是豪豪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>var preloader = {
+            </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">93</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2021-07-31T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">218.9k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-05-02T17:15:05.725Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 陈泽豪</div><div class="footer_custom_text">我是豪豪</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>var preloader = {
   endLoading: () => {
     document.body.style.overflow = 'auto';
     document.getElementById('loading-box').classList.add("loaded")
